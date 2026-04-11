@@ -161,16 +161,16 @@ class ElegooCCDevice extends PrinterDevice {
     this.homey.flow.getActionCard('set_chamber_light').registerRunListener(async (args, state) => this.onActionSetLight(args.state));
 
     // Conditions
-    this.homey.flow.getDeviceConditionCard('is_printing').registerRunListener(async (args, state) => {
+    this.homey.flow.getConditionCard('is_printing').registerRunListener(async (args, state) => {
       return this.getCapabilityValue('printer_status') === 'Printing';
     });
-    this.homey.flow.getDeviceConditionCard('is_paused').registerRunListener(async (args, state) => {
+    this.homey.flow.getConditionCard('is_paused').registerRunListener(async (args, state) => {
       return this.getCapabilityValue('printer_status') === 'Paused';
     });
-    this.homey.flow.getDeviceConditionCard('is_offline').registerRunListener(async (args, state) => {
+    this.homey.flow.getConditionCard('is_offline').registerRunListener(async (args, state) => {
       return !this.getAvailable();
     });
-    this.homey.flow.getDeviceConditionCard('is_light_on').registerRunListener(async (args, state) => {
+    this.homey.flow.getConditionCard('is_light_on').registerRunListener(async (args, state) => {
       return this.getCapabilityValue('onoff.chamberlight') === true;
     });
   }
@@ -423,7 +423,7 @@ class ElegooCCDevice extends PrinterDevice {
 
     // --- FW Update ---
     if (attributes.FwUpdate) {
-      this.homey.flow.getDeviceTriggerCard('fw_update_available')
+      this.homey.flow.getTriggerCard('fw_update_available')
         .trigger(this)
         .catch(this.error);
     }
@@ -456,11 +456,11 @@ class ElegooCCDevice extends PrinterDevice {
 
     try {
       if (newStatus === 'printing' && oldStatus !== 'printing') {
-        this.homey.flow.getDeviceTriggerCard('print_started').trigger(this).catch(this.error);
+        this.homey.flow.getTriggerCard('print_started').trigger(this).catch(this.error);
       } else if (newStatus === 'finished' && oldStatus !== 'finished') {
-        this.homey.flow.getDeviceTriggerCard('print_finished').trigger(this).catch(this.error);
+        this.homey.flow.getTriggerCard('print_finished').trigger(this).catch(this.error);
       } else if (newStatus === 'error') {
-        this.homey.flow.getDeviceTriggerCard('error_detected').trigger(this, { error_msg: 'Printer reported error state' }).catch(this.error);
+        this.homey.flow.getTriggerCard('error_detected').trigger(this, { error_msg: 'Printer reported error state' }).catch(this.error);
       }
     } catch (err) {
       this.log('[Warning] Failed to trigger flow card:', err.message);
