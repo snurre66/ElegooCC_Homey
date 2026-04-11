@@ -16,14 +16,14 @@ class ElegooCCDriver extends Homey.Driver {
         const discoveredPrinters = await Discovery.discover();
         this.log(`Found ${discoveredPrinters.length} printers`);
 
-        return discoveredPrinters.map(printer => {
+        return discoveredPrinters.map((printer) => {
           const device = {
             name: printer.name || 'Elegoo Printer',
             data: { id: printer.address },
             settings: {
               address: printer.address,
-              model: printer.model
-            }
+              model: printer.model,
+            },
           };
           this.log('Discovered printer:', device.name, '@', device.data.id);
           return device;
@@ -44,8 +44,8 @@ class ElegooCCDriver extends Homey.Driver {
             data: { id: printer.address },
             settings: {
               address: printer.address,
-              model: printer.model
-            }
+              model: printer.model,
+            },
           };
           this.log('Found printer through manual probe:', device.name, '@', device.data.id);
           return device;
@@ -58,7 +58,7 @@ class ElegooCCDriver extends Homey.Driver {
       }
     });
 
-    // Custom add_device handler if needed, but SDK v3 often handles this 
+    // Custom add_device handler if needed, but SDK v3 often handles this
     // automatically if the returned device from a handler is passed to Homey.addDevice()
     session.setHandler('add_device', async (device) => {
       this.log('Adding device:', device.name);

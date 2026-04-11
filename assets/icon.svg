@@ -1,8 +1,48 @@
-<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="100" height="100" rx="20" fill="#1A1A1A"/>
-<path d="M30 35H70V45H30V35Z" fill="#00E5FF"/>
-<path d="M30 50H70V60H30V50Z" fill="#00E5FF"/>
-<path d="M30 65H50V75H30V65Z" fill="#00E5FF"/>
-<path d="M60 65H70V75H60V65Z" fill="#00E5FF"/>
-<path d="M50 25H55V35H50V25Z" fill="white"/>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Container -->
+  <rect width="1024" height="1024" rx="160" fill="white"/>
+  
+  <!-- Outer Frame (Rounded Cube) -->
+  <path d="M150 250C150 205.817 185.817 170 230 170H794C838.183 170 874 205.817 874 250V774C874 818.183 838.183 854 794 854H230C185.817 854 150 818.183 150 774V250Z" fill="url(#paint0_linear)"/>
+  
+  <!-- Front View Window Indentation -->
+  <rect x="200" y="220" width="624" height="580" rx="40" fill="#2A2A2A" fill-opacity="0.9"/>
+  
+  <!-- Internal Chamber Depth Gradient -->
+  <rect x="220" y="240" width="584" height="540" rx="30" fill="url(#paint1_radial)"/>
+  
+  <!-- Gantry Rails (XY Axis) -->
+  <rect x="220" y="400" width="584" height="8" rx="4" fill="#4B4B4B"/>
+  <rect x="220" y="415" width="584" height="8" rx="4" fill="#4B4B4B"/>
+  
+  <!-- Z-Axis Lead Screws (Simplified) -->
+  <rect x="250" y="240" width="12" height="540" fill="#3D3D3D"/>
+  <rect x="762" y="240" width="12" height="540" fill="#3D3D3D"/>
+  
+  <!-- Print Head (The Active Unit) -->
+  <rect x="440" y="340" width="144" height="100" rx="12" fill="#00E5FF"/>
+  <rect x="490" y="440" width="44" height="20" fill="#00E5FF"/>
+  
+  <!-- Semi-Transparent Glass Effect Over the Window -->
+  <rect x="200" y="220" width="624" height="580" rx="40" fill="white" fill-opacity="0.05"/>
+  
+  <!-- Printed Object Placeholder (Glowing Pyramid/Shape) -->
+  <path d="M400 700L512 550L624 700H400Z" fill="#00E5FF" fill-opacity="0.8">
+    <animate attributeName="fill-opacity" values="0.6;0.9;0.6" dur="3s" repeatCount="indefinite" />
+  </path>
+  
+  <!-- Control Panel Detail -->
+  <rect x="680" y="740" width="100" height="30" rx="6" fill="#1A1A1A"/>
+  <rect x="690" y="750" width="40" height="10" rx="2" fill="#00E5FF" fill-opacity="0.5"/>
+  
+  <defs>
+    <linearGradient id="paint0_linear" x1="512" y1="170" x2="512" y2="854" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#333333"/>
+      <stop offset="1" stop-color="#1A1A1A"/>
+    </linearGradient>
+    <radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 510) rotate(90) scale(270 292)">
+      <stop stop-color="#2D2D2D"/>
+      <stop offset="1" stop-color="#151515"/>
+    </radialGradient>
+  </defs>
 </svg>

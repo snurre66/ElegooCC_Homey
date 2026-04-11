@@ -47,7 +47,7 @@
         display: block;
         margin-top: 15px;
         font-size: 13px;
-        color: #00E5FF;
+        color: #00e5ff;
         text-decoration: none;
         text-align: center;
       }
@@ -81,7 +81,7 @@
       .button {
         width: 100%;
         padding: 10px;
-        background: #00E5FF;
+        background: #00e5ff;
         color: white;
         border: none;
         border-radius: 4px;
@@ -94,13 +94,11 @@
     </style>
   </head>
   <body>
-    <div id="searching" class="loading" data-i18n="pair.searching">
-      Searching for Elegoo printers...
-    </div>
+    <div id="searching" class="loading" data-i18n="pair.searching">Searching for Elegoo printers...</div>
 
     <ul id="device-list" class="device-list"></ul>
 
-    <div id="no-devices" class="loading" style="display:none;" data-i18n="pair.no_devices">
+    <div id="no-devices" class="loading" style="display: none" data-i18n="pair.no_devices">
       No printers found automatically.
     </div>
 
@@ -151,7 +149,7 @@
             return;
           }
 
-          devices.forEach(device => {
+          devices.forEach((device) => {
             const li = document.createElement('li');
             li.className = 'device-item';
             li.innerHTML = `
@@ -172,7 +170,7 @@
         errorDiv.style.display = 'none';
         searching.style.display = 'block';
         searching.innerText = Homey.__('pair.adding');
-        
+
         // Homey.createDevice finalizes the pairing and adds it to the Homey devices list
         Homey.createDevice(device, (err) => {
           searching.style.display = 'none';
@@ -181,7 +179,7 @@
             errorDiv.style.display = 'block';
             return;
           }
-          
+
           // Close the pairing window on success
           Homey.done();
         });

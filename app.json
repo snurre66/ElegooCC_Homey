@@ -1,5 +1,4 @@
 {
-  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.elegoo.sdcp",
   "name": {
     "en": "Elegoo SDCP Printers",
@@ -32,30 +31,12 @@
     }
   },
   "compatibility": ">=5.0.0",
-  "category": [
-    "appliances"
-  ],
+  "category": ["appliances"],
   "tags": {
-    "en": [
-      "elegoo",
-      "3d printer",
-      "smart printer"
-    ],
-    "nl": [
-      "elegoo",
-      "3d-printer",
-      "slimme printer"
-    ],
-    "de": [
-      "elegoo",
-      "3D-Drucker",
-      "Smart-Drucker"
-    ],
-    "no": [
-      "elegoo",
-      "3d-skriver",
-      "smart-skriver"
-    ]
+    "en": ["elegoo", "3d printer", "smart printer"],
+    "nl": ["elegoo", "3d-printer", "slimme printer"],
+    "de": ["elegoo", "3D-Drucker", "Smart-Drucker"],
+    "no": ["elegoo", "3d-skriver", "smart-skriver"]
   },
   "permissions": [],
   "brandColor": "#00E5FF",
@@ -63,338 +44,9 @@
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
   },
-  "flow": {
-    "triggers": [
-      {
-        "id": "error_detected",
-        "title": {
-          "en": "Error Detected",
-          "nl": "Fout gedetecteerd",
-          "de": "Fehler erkannt",
-          "no": "Feil oppdaget"
-        },
-        "tokens": [
-          {
-            "id": "error_msg",
-            "name": "error_msg",
-            "type": "string",
-            "title": {
-              "en": "Error Message",
-              "nl": "Foutmelding",
-              "de": "Fehlermeldung",
-              "no": "Feilmelding"
-            }
-          }
-        ]
-      },
-      {
-        "id": "fw_update_available",
-        "title": {
-          "en": "Firmware Update Available",
-          "nl": "Firmware-update beschikbaar",
-          "de": "Firmware-Update verfügbar",
-          "no": "Fastvareoppdatering tilgjengelig"
-        }
-      },
-      {
-        "id": "print_finished",
-        "title": {
-          "en": "Print Finished",
-          "nl": "Print voltooid",
-          "de": "Druck beendet",
-          "no": "Utskrift fullført"
-        }
-      },
-      {
-        "id": "print_started",
-        "title": {
-          "en": "Print Started",
-          "nl": "Print gestart",
-          "de": "Druck gestartet",
-          "no": "Utskrift startet"
-        }
-      },
-      {
-        "id": "printer_offline",
-        "title": {
-          "en": "Printer Offline",
-          "nl": "Printer offline",
-          "de": "Drucker offline",
-          "no": "Skriver frakoblet"
-        }
-      }
-    ],
-    "conditions": [
-      {
-        "id": "is_light_on",
-        "title": {
-          "en": "Chamber Light is On",
-          "nl": "Kamerverlichting is aan",
-          "de": "Kammerbeleuchtung ist ein",
-          "no": "Kammerlys er på"
-        }
-      },
-      {
-        "id": "is_offline",
-        "title": {
-          "en": "Is Offline",
-          "nl": "Is offline",
-          "de": "Ist offline",
-          "no": "Er frakoblet"
-        }
-      },
-      {
-        "id": "is_paused",
-        "title": {
-          "en": "Is Paused",
-          "nl": "Gepauzeerd",
-          "de": "Pausiert",
-          "no": "Satt på pause"
-        }
-      },
-      {
-        "id": "is_printing",
-        "title": {
-          "en": "Is Printing",
-          "nl": "Aan het printen",
-          "de": "Druckt",
-          "no": "Skriver ut"
-        }
-      }
-    ],
-    "actions": [
-      {
-        "id": "emergency_stop",
-        "title": {
-          "en": "Emergency Stop",
-          "nl": "Noodstop",
-          "de": "Notaus",
-          "no": "Nødstopp"
-        }
-      },
-      {
-        "id": "home_axes",
-        "title": {
-          "en": "Home Axes",
-          "nl": "Assen home",
-          "de": "Achsen homen",
-          "no": "Hjem akser"
-        },
-        "titleFormatted": {
-          "en": "Home [[axes]]",
-          "nl": "[[axes]] home",
-          "de": "[[axes]] homen",
-          "no": "Hjem [[axes]]"
-        },
-        "args": [
-          {
-            "name": "axes",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "XYZ",
-                "label": {
-                  "en": "All (XYZ)",
-                  "nl": "Alle (XYZ)",
-                  "de": "Alle (XYZ)",
-                  "no": "Alle (XYZ)"
-                }
-              },
-              {
-                "id": "X",
-                "label": {
-                  "en": "X Axis",
-                  "nl": "X-as",
-                  "de": "X-Achse",
-                  "no": "X-akse"
-                }
-              },
-              {
-                "id": "Y",
-                "label": {
-                  "en": "Y Axis",
-                  "nl": "Y-as",
-                  "de": "Y-Achse",
-                  "no": "Y-akse"
-                }
-              },
-              {
-                "id": "Z",
-                "label": {
-                  "en": "Z Axis",
-                  "nl": "Z-as",
-                  "de": "Z-Achse",
-                  "no": "Z-akse"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "pause_print",
-        "title": {
-          "en": "Pause Print",
-          "nl": "Print pauzeren",
-          "de": "Druck pausieren",
-          "no": "Sett utskrift på pause"
-        }
-      },
-      {
-        "id": "resume_print",
-        "title": {
-          "en": "Resume Print",
-          "nl": "Print hervatten",
-          "de": "Druck fortsetzen",
-          "no": "Gjenoppta utskrift"
-        }
-      },
-      {
-        "id": "set_chamber_light",
-        "title": {
-          "en": "Set Chamber Light",
-          "nl": "Kamerverlichting instellen",
-          "de": "Kammerbeleuchtung setzen",
-          "no": "Sett kammerlys"
-        },
-        "titleFormatted": {
-          "en": "Turn chamber light [[state]]",
-          "nl": "Zet kamerverlichting [[state]]",
-          "de": "Schalte Kammerbeleuchtung [[state]]",
-          "no": "Slå kammerlys [[state]]"
-        },
-        "args": [
-          {
-            "name": "state",
-            "type": "checkbox",
-            "label": {
-              "en": "Turn On",
-              "nl": "Aan",
-              "de": "Ein",
-              "no": "På"
-            }
-          }
-        ]
-      },
-      {
-        "id": "set_fan_speed_pct",
-        "title": {
-          "en": "Set Fan Speed",
-          "nl": "Ventilatorsnelheid instellen",
-          "de": "Lüftergeschwindigkeit setzen",
-          "no": "Sett viftehastighet"
-        },
-        "titleFormatted": {
-          "en": "Set [[fan]] speed to [[percentage]]%",
-          "nl": "Zet [[fan]] snelheid op [[percentage]]%",
-          "de": "Setze [[fan]]-Geschwindigkeit auf [[percentage]]%",
-          "no": "Sett [[fan]]-hastighet til [[percentage]]%"
-        },
-        "args": [
-          {
-            "name": "fan",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "model",
-                "label": {
-                  "en": "Part Cooling Fan",
-                  "nl": "Objectkoeler",
-                  "de": "Bauteillüfter",
-                  "no": "Delkjølevifte"
-                }
-              },
-              {
-                "id": "aux",
-                "label": {
-                  "en": "Auxiliary Fan",
-                  "nl": "Extra ventilator",
-                  "de": "Zusatzlüfter",
-                  "no": "Ekstravifte"
-                }
-              },
-              {
-                "id": "exhaust",
-                "label": {
-                  "en": "Exhaust Fan",
-                  "nl": "Uitlaatventilator",
-                  "de": "Abluftlüfter",
-                  "no": "Eksosvifte"
-                }
-              }
-            ]
-          },
-          {
-            "name": "percentage",
-            "type": "number",
-            "min": 0,
-            "max": 100
-          }
-        ]
-      },
-      {
-        "id": "set_speed_preset",
-        "title": {
-          "en": "Set Speed Preset",
-          "nl": "Snelheidsvoorinstelling instellen",
-          "de": "Geschwindigkeits-Preset setzen",
-          "no": "Angi hastighetsforinnstilling"
-        },
-        "titleFormatted": {
-          "en": "Set speed to [[preset]]%",
-          "nl": "Zet snelheid op [[preset]]%",
-          "de": "Geschwindigkeit auf [[preset]]% setzen",
-          "no": "Sett hastighet til [[preset]]%"
-        },
-        "args": [
-          {
-            "name": "preset",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "50",
-                "label": {
-                  "en": "Silent (50%)",
-                  "nl": "Stil (50%)",
-                  "de": "Leise (50%)",
-                  "no": "Stille (50%)"
-                }
-              },
-              {
-                "id": "100",
-                "label": {
-                  "en": "Balanced (100%)",
-                  "nl": "Gebalanceerd (100%)",
-                  "de": "Ausgeglichen (100%)",
-                  "no": "Balansert (100%)"
-                }
-              },
-              {
-                "id": "130",
-                "label": {
-                  "en": "Sport (130%)",
-                  "nl": "Sport (130%)",
-                  "de": "Sport (130%)",
-                  "no": "Sport (130%)"
-                }
-              },
-              {
-                "id": "160",
-                "label": {
-                  "en": "Ludicrous (160%)",
-                  "nl": "Absurd (160%)",
-                  "de": "Absurd (160%)",
-                  "no": "Latterlig (160%)"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
   "drivers": [
     {
+      "id": "elegoo_cc",
       "name": {
         "en": "Elegoo Centauri Carbon",
         "nl": "Elegoo Centauri Carbon",
@@ -454,7 +106,7 @@
             "en": "Target Nozzle",
             "nl": "Doel nozzle",
             "de": "Ziel-Düse",
-            "no": "Måldyse"
+            "no": "Dyse set temp"
           },
           "min": 0,
           "max": 300,
@@ -466,7 +118,7 @@
             "en": "Current Bed Temp",
             "nl": "Huidige bed temp",
             "de": "Aktuelle Betttemperatur",
-            "no": "Nåværende sengetemperatur"
+            "no": "Nåværende bed temp"
           }
         },
         "target_temperature.bed": {
@@ -474,7 +126,7 @@
             "en": "Target Bed",
             "nl": "Doel bed",
             "de": "Ziel-Bett",
-            "no": "Målseng"
+            "no": "Bed temp"
           },
           "min": 0,
           "max": 120,
@@ -604,7 +256,7 @@
             "en": "Pause Program",
             "nl": "Programma pauzeren",
             "de": "Programm pausieren",
-            "no": "Sett program på pause"
+            "no": "Pause Program"
           }
         },
         "button.resume": {
@@ -628,7 +280,7 @@
             "en": "Home All Axes",
             "nl": "Alle assen home",
             "de": "Alle Achsen homen",
-            "no": "Hjem alle akser"
+            "no": "Referer alle akser"
           }
         },
         "alarm_filament": {
@@ -641,10 +293,10 @@
         },
         "alarm_contact": {
           "title": {
-            "en": "Door Close Alarm",
+            "en": "Door Open Alarm",
             "nl": "Deur sluit alarm",
             "de": "Tür-Schließ-Alarm",
-            "no": "Dør lukket-alarm"
+            "no": "Dør åpen-alarm"
           }
         },
         "current_layer": {
@@ -773,6 +425,12 @@
             "nl": "Resterend geheugen",
             "de": "Verbleibender Speicher",
             "no": "Gjenværende minne"
+          },
+          "units": {
+            "en": "B",
+            "nl": "B",
+            "de": "B",
+            "no": "B"
           }
         }
       },
@@ -792,338 +450,7 @@
             }
           }
         }
-      ],
-      "flow": {
-        "triggers": [
-          {
-            "id": "print_started",
-            "title": {
-              "en": "Print Started",
-              "nl": "Print gestart",
-              "de": "Druck gestartet",
-              "no": "Utskrift startet"
-            }
-          },
-          {
-            "id": "print_finished",
-            "title": {
-              "en": "Print Finished",
-              "nl": "Print voltooid",
-              "de": "Druck beendet",
-              "no": "Utskrift fullført"
-            }
-          },
-          {
-            "id": "printer_offline",
-            "title": {
-              "en": "Printer Offline",
-              "nl": "Printer offline",
-              "de": "Drucker offline",
-              "no": "Skriver frakoblet"
-            }
-          },
-          {
-            "id": "fw_update_available",
-            "title": {
-              "en": "Firmware Update Available",
-              "nl": "Firmware-update beschikbaar",
-              "de": "Firmware-Update verfügbar",
-              "no": "Fastvareoppdatering tilgjengelig"
-            }
-          },
-          {
-            "id": "error_detected",
-            "title": {
-              "en": "Error Detected",
-              "nl": "Fout gedetecteerd",
-              "de": "Fehler erkannt",
-              "no": "Feil oppdaget"
-            },
-            "tokens": [
-              {
-                "id": "error_msg",
-                "name": "error_msg",
-                "type": "string",
-                "title": {
-                  "en": "Error Message",
-                  "nl": "Foutmelding",
-                  "de": "Fehlermeldung",
-                  "no": "Feilmelding"
-                }
-              }
-            ]
-          }
-        ],
-        "actions": [
-          {
-            "id": "emergency_stop",
-            "title": {
-              "en": "Emergency Stop",
-              "nl": "Noodstop",
-              "de": "Notaus",
-              "no": "Nødstopp"
-            }
-          },
-          {
-            "id": "pause_print",
-            "title": {
-              "en": "Pause Print",
-              "nl": "Print pauzeren",
-              "de": "Druck pausieren",
-              "no": "Sett utskrift på pause"
-            }
-          },
-          {
-            "id": "resume_print",
-            "title": {
-              "en": "Resume Print",
-              "nl": "Print hervatten",
-              "de": "Druck fortsetzen",
-              "no": "Gjenoppta utskrift"
-            }
-          },
-          {
-            "id": "home_axes",
-            "title": {
-              "en": "Home Axes",
-              "nl": "Assen home",
-              "de": "Achsen homen",
-              "no": "Hjem akser"
-            },
-            "titleFormatted": {
-              "en": "Home [[axes]]",
-              "nl": "[[axes]] home",
-              "de": "[[axes]] homen",
-              "no": "Hjem [[axes]]"
-            },
-            "args": [
-              {
-                "name": "axes",
-                "type": "dropdown",
-                "values": [
-                  {
-                    "id": "XYZ",
-                    "label": {
-                      "en": "All (XYZ)",
-                      "nl": "Alle (XYZ)",
-                      "de": "Alle (XYZ)",
-                      "no": "Alle (XYZ)"
-                    }
-                  },
-                  {
-                    "id": "X",
-                    "label": {
-                      "en": "X Axis",
-                      "nl": "X-as",
-                      "de": "X-Achse",
-                      "no": "X-akse"
-                    }
-                  },
-                  {
-                    "id": "Y",
-                    "label": {
-                      "en": "Y Axis",
-                      "nl": "Y-as",
-                      "de": "Y-Achse",
-                      "no": "Y-akse"
-                    }
-                  },
-                  {
-                    "id": "Z",
-                    "label": {
-                      "en": "Z Axis",
-                      "nl": "Z-as",
-                      "de": "Z-Achse",
-                      "no": "Z-akse"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": "set_speed_preset",
-            "title": {
-              "en": "Set Speed Preset",
-              "nl": "Snelheidsvoorinstelling instellen",
-              "de": "Geschwindigkeits-Preset setzen",
-              "no": "Angi hastighetsforinnstilling"
-            },
-            "titleFormatted": {
-              "en": "Set speed to [[preset]]%",
-              "nl": "Zet snelheid op [[preset]]%",
-              "de": "Geschwindigkeit auf [[preset]]% setzen",
-              "no": "Sett hastighet til [[preset]]%"
-            },
-            "args": [
-              {
-                "name": "preset",
-                "type": "dropdown",
-                "values": [
-                  {
-                    "id": "50",
-                    "label": {
-                      "en": "Silent (50%)",
-                      "nl": "Stil (50%)",
-                      "de": "Leise (50%)",
-                      "no": "Stille (50%)"
-                    }
-                  },
-                  {
-                    "id": "100",
-                    "label": {
-                      "en": "Balanced (100%)",
-                      "nl": "Gebalanceerd (100%)",
-                      "de": "Ausgeglichen (100%)",
-                      "no": "Balansert (100%)"
-                    }
-                  },
-                  {
-                    "id": "130",
-                    "label": {
-                      "en": "Sport (130%)",
-                      "nl": "Sport (130%)",
-                      "de": "Sport (130%)",
-                      "no": "Sport (130%)"
-                    }
-                  },
-                  {
-                    "id": "160",
-                    "label": {
-                      "en": "Ludicrous (160%)",
-                      "nl": "Absurd (160%)",
-                      "de": "Absurd (160%)",
-                      "no": "Latterlig (160%)"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": "set_fan_speed_pct",
-            "title": {
-              "en": "Set Fan Speed",
-              "nl": "Ventilatorsnelheid instellen",
-              "de": "Lüftergeschwindigkeit setzen",
-              "no": "Sett viftehastighet"
-            },
-            "titleFormatted": {
-              "en": "Set [[fan]] speed to [[percentage]]%",
-              "nl": "Zet [[fan]] snelheid op [[percentage]]%",
-              "de": "Setze [[fan]]-Geschwindigkeit auf [[percentage]]%",
-              "no": "Sett [[fan]]-hastighet til [[percentage]]%"
-            },
-            "args": [
-              {
-                "name": "fan",
-                "type": "dropdown",
-                "values": [
-                  {
-                    "id": "model",
-                    "label": {
-                      "en": "Part Cooling Fan",
-                      "nl": "Objectkoeler",
-                      "de": "Bauteillüfter",
-                      "no": "Delkjølevifte"
-                    }
-                  },
-                  {
-                    "id": "aux",
-                    "label": {
-                      "en": "Auxiliary Fan",
-                      "nl": "Extra ventilator",
-                      "de": "Zusatzlüfter",
-                      "no": "Ekstravifte"
-                    }
-                  },
-                  {
-                    "id": "exhaust",
-                    "label": {
-                      "en": "Exhaust Fan",
-                      "nl": "Uitlaatventilator",
-                      "de": "Abluftlüfter",
-                      "no": "Eksosvifte"
-                    }
-                  }
-                ]
-              },
-              {
-                "name": "percentage",
-                "type": "number",
-                "min": 0,
-                "max": 100
-              }
-            ]
-          },
-          {
-            "id": "set_chamber_light",
-            "title": {
-              "en": "Set Chamber Light",
-              "nl": "Kamerverlichting instellen",
-              "de": "Kammerbeleuchtung setzen",
-              "no": "Sett kammerlys"
-            },
-            "titleFormatted": {
-              "en": "Turn chamber light [[state]]",
-              "nl": "Zet kamerverlichting [[state]]",
-              "de": "Schalte Kammerbeleuchtung [[state]]",
-              "no": "Slå kammerlys [[state]]"
-            },
-            "args": [
-              {
-                "name": "state",
-                "type": "checkbox",
-                "label": {
-                  "en": "Turn On",
-                  "nl": "Aan",
-                  "de": "Ein",
-                  "no": "På"
-                }
-              }
-            ]
-          }
-        ],
-        "conditions": [
-          {
-            "id": "is_printing",
-            "title": {
-              "en": "Is Printing",
-              "nl": "Aan het printen",
-              "de": "Druckt",
-              "no": "Skriver ut"
-            }
-          },
-          {
-            "id": "is_paused",
-            "title": {
-              "en": "Is Paused",
-              "nl": "Gepauzeerd",
-              "de": "Pausiert",
-              "no": "Satt på pause"
-            }
-          },
-          {
-            "id": "is_offline",
-            "title": {
-              "en": "Is Offline",
-              "nl": "Is offline",
-              "de": "Ist offline",
-              "no": "Er frakoblet"
-            }
-          },
-          {
-            "id": "is_light_on",
-            "title": {
-              "en": "Chamber Light is On",
-              "nl": "Kamerverlichting is aan",
-              "de": "Kammerbeleuchtung ist ein",
-              "no": "Kammerlys er på"
-            }
-          }
-        ]
-      },
-      "id": "elegoo_cc"
+      ]
     }
   ],
   "capabilities": {
@@ -1183,10 +510,10 @@
     "filename": {
       "type": "string",
       "title": {
-        "en": "File Name",
-        "nl": "Bestandsnaam",
-        "de": "Dateiname",
-        "no": "Filnavn"
+        "en": "Current File",
+        "nl": "Huidig bestand",
+        "de": "Aktuelle Datei",
+        "no": "Nåværende fil"
       },
       "getable": true,
       "setable": false,
@@ -1234,10 +561,10 @@
     "mac_address": {
       "type": "string",
       "title": {
-        "en": "MAC Address",
-        "nl": "MAC-adres",
-        "de": "MAC-Adresse",
-        "no": "MAC-adresse"
+        "en": "Mainboard MAC",
+        "nl": "Moederbord MAC",
+        "de": "Mainboard-MAC",
+        "no": "Hovedkort-MAC"
       },
       "getable": true,
       "setable": false,
@@ -1340,10 +667,10 @@
     "time_left": {
       "type": "number",
       "title": {
-        "en": "Time Left",
+        "en": "Time Remaining",
         "nl": "Resterende tijd",
         "de": "Verbleibende Zeit",
-        "no": "Tid igjen"
+        "no": "Gjenværende tid"
       },
       "getable": true,
       "setable": false,
@@ -1422,5 +749,748 @@
       "units": "mm",
       "icon": "/assets/icons/z_position.svg"
     }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "print_started",
+        "title": {
+          "en": "Print Started",
+          "nl": "Print gestart",
+          "de": "Druck gestartet",
+          "no": "Utskrift startet"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "print_finished",
+        "title": {
+          "en": "Print Finished",
+          "nl": "Print voltooid",
+          "de": "Druck beendet",
+          "no": "Utskrift fullført"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "print_paused",
+        "title": {
+          "en": "Print Paused",
+          "nl": "Print gepauzeerd",
+          "de": "Druck pausiert",
+          "no": "Utskrift er satt på pause"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "print_resumed",
+        "title": {
+          "en": "Print Resumed",
+          "nl": "Print hervat",
+          "de": "Druck fortgesetzt",
+          "no": "Utskrift gjenopptatt"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "print_cancelled",
+        "title": {
+          "en": "Print Cancelled",
+          "nl": "Print geannuleerd",
+          "de": "Druck abgebrochen",
+          "no": "Utskrift avbrutt"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "filament_runout",
+        "title": {
+          "en": "Filament Runout",
+          "nl": "Filament op",
+          "de": "Filament leer",
+          "no": "Filament tomt"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "door_status_changed",
+        "title": {
+          "en": "Door status changed",
+          "nl": "Deurstatus gewijzigd",
+          "de": "Türstatus geändert",
+          "no": "Dørstatus endret"
+        },
+        "tokens": [
+          {
+            "id": "state",
+            "name": "State",
+            "type": "string",
+            "title": {
+              "en": "State",
+              "nl": "Status",
+              "de": "Status",
+              "no": "Status"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "usb_status_changed",
+        "title": {
+          "en": "USB drive status changed",
+          "nl": "USB-schijfstatus gewijzigd",
+          "de": "USB-Laufwerkstatus geändert",
+          "no": "USB-stasjonsstatus endret"
+        },
+        "tokens": [
+          {
+            "id": "state",
+            "name": "State",
+            "type": "string",
+            "title": {
+              "en": "State",
+              "nl": "Status",
+              "de": "Status",
+              "no": "Status"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "error_detected",
+        "title": {
+          "en": "Error Detected",
+          "nl": "Fout gedetecteerd",
+          "de": "Fehler erkannt",
+          "no": "Feil oppdaget"
+        },
+        "tokens": [
+          {
+            "id": "error_msg",
+            "name": "error_msg",
+            "type": "string",
+            "title": {
+              "en": "Error Message",
+              "nl": "Foutmelding",
+              "de": "Fehlermeldung",
+              "no": "Feilmelding"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "printer_offline",
+        "title": {
+          "en": "Printer Offline",
+          "nl": "Printer offline",
+          "de": "Drucker offline",
+          "no": "Skriver frakoblet"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "printer_online",
+        "title": {
+          "en": "Printer Online",
+          "nl": "Printer online",
+          "de": "Drucker online",
+          "no": "Skriver tilkoblet"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "fw_update_available",
+        "title": {
+          "en": "Firmware Update Available",
+          "nl": "Firmware-update beschikbaar",
+          "de": "Firmware-Update verfügbar",
+          "no": "Fastvareoppdatering tilgjengelig"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "progress_reached",
+        "title": {
+          "en": "Print progress reached",
+          "nl": "Afdrukvoortgang bereikt",
+          "de": "Druckfortschritt erreicht",
+          "no": "Utskriftfremdrift nådd"
+        },
+        "titleFormatted": {
+          "en": "Print progress reaches [[percentage]]%",
+          "nl": "Afdrukvoortgang bereikt [[percentage]]%",
+          "de": "Druckfortschritt erreicht [[percentage]]%",
+          "no": "Utskriftfremdrift når [[percentage]]%"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          },
+          {
+            "name": "percentage",
+            "type": "number",
+            "title": {
+              "en": "Percentage",
+              "nl": "Percentage",
+              "de": "Prozent",
+              "no": "Prosent"
+            },
+            "min": 0,
+            "max": 100,
+            "placeholder": {
+              "en": "50"
+            }
+          }
+        ]
+      },
+      {
+        "id": "layer_reached",
+        "title": {
+          "en": "Layer reached",
+          "nl": "Laag bereikt",
+          "de": "Schicht erreicht",
+          "no": "Lag nådd"
+        },
+        "titleFormatted": {
+          "en": "Layer reached [[layer]]",
+          "nl": "Laag bereikt [[layer]]",
+          "de": "Schicht erreicht [[layer]]",
+          "no": "Lag nådd [[layer]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          },
+          {
+            "name": "layer",
+            "type": "number",
+            "title": {
+              "en": "Layer Number",
+              "nl": "Laagnummer",
+              "de": "Schichtnummer",
+              "no": "Lagnummer"
+            },
+            "min": 0,
+            "placeholder": {
+              "en": "100"
+            }
+          }
+        ]
+      },
+      {
+        "id": "status_changed",
+        "title": {
+          "en": "Printer status changed",
+          "nl": "Printerstatus gewijzigd",
+          "de": "Druckerstatus geändert",
+          "no": "Skriverstatus endret"
+        },
+        "tokens": [
+          {
+            "id": "status",
+            "name": "Status",
+            "type": "string",
+            "title": {
+              "en": "Status",
+              "nl": "Status",
+              "de": "Status",
+              "no": "Status"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "nozzle_temp_reached",
+        "title": {
+          "en": "Nozzle temperature reached",
+          "nl": "Nozzle-temperatuur bereikt",
+          "de": "Düsentemperatur erreicht",
+          "no": "Dysetemperatur nådd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "bed_temp_reached",
+        "title": {
+          "en": "Bed temperature reached",
+          "nl": "Bed-temperatuur bereikt",
+          "de": "Betttemperatur erreicht",
+          "no": "Bedtemperatur nådd"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "chamber_temp_reached",
+        "title": {
+          "en": "Chamber temperature reached",
+          "nl": "Kamertemperatuur bereikt",
+          "de": "Kammertemperatur erreicht",
+          "no": "Kammertemperatur nådd"
+        },
+        "titleFormatted": {
+          "en": "Chamber temperature reaches [[temperature]]°C",
+          "nl": "Kamertemperatuur bereikt [[temperature]]°C",
+          "de": "Kammertemperatur erreicht [[temperature]]°C",
+          "no": "Kammertemperatur når [[temperature]]°C"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          },
+          {
+            "name": "temperature",
+            "type": "number",
+            "title": {
+              "en": "Temperature",
+              "nl": "Temperatuur",
+              "de": "Temperatur",
+              "no": "Temperatur"
+            },
+            "min": 0,
+            "max": 100,
+            "placeholder": {
+              "en": "40"
+            }
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "emergency_stop",
+        "title": {
+          "en": "Emergency Stop",
+          "nl": "Noodstop",
+          "de": "Notaus",
+          "no": "Nødstopp"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "pause_print",
+        "title": {
+          "en": "Pause Print",
+          "nl": "Print pauzeren",
+          "de": "Druck pausieren",
+          "no": "Sett utskrift på pause"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "resume_print",
+        "title": {
+          "en": "Resume Print",
+          "nl": "Print hervatten",
+          "de": "Druck fortsetzen",
+          "no": "Gjenoppta utskrift"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "home_axes",
+        "title": {
+          "en": "Home Axes",
+          "nl": "Assen home",
+          "de": "Achsen homen",
+          "no": "Hjem akser"
+        },
+        "titleFormatted": {
+          "en": "Home [[axes]]",
+          "nl": "[[axes]] home",
+          "de": "[[axes]] homen",
+          "no": "Hjem [[axes]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          },
+          {
+            "name": "axes",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "XYZ",
+                "label": {
+                  "en": "All (XYZ)",
+                  "nl": "Alle (XYZ)",
+                  "de": "Alle (XYZ)",
+                  "no": "Alle (XYZ)"
+                }
+              },
+              {
+                "id": "X",
+                "label": {
+                  "en": "X Axis",
+                  "nl": "X-as",
+                  "de": "X-Achse",
+                  "no": "X-akse"
+                }
+              },
+              {
+                "id": "Y",
+                "label": {
+                  "en": "Y Axis",
+                  "nl": "Y-as",
+                  "de": "Y-Achse",
+                  "no": "Y-akse"
+                }
+              },
+              {
+                "id": "Z",
+                "label": {
+                  "en": "Z Axis",
+                  "nl": "Z-as",
+                  "de": "Z-Achse",
+                  "no": "Z-akse"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_speed_preset",
+        "title": {
+          "en": "Set Speed Preset",
+          "nl": "Snelheidsvoorinstelling instellen",
+          "de": "Geschwindigkeits-Preset setzen",
+          "no": "Angi hastighetsforinnstilling"
+        },
+        "titleFormatted": {
+          "en": "Set speed to [[preset]]%",
+          "nl": "Zet snelheid op [[preset]]%",
+          "de": "Geschwindigkeit auf [[preset]]% setzen",
+          "no": "Sett hastighet til [[preset]]%"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          },
+          {
+            "name": "preset",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "50",
+                "label": {
+                  "en": "Silent (50%)",
+                  "nl": "Stil (50%)",
+                  "de": "Leise (50%)",
+                  "no": "Stille (50%)"
+                }
+              },
+              {
+                "id": "100",
+                "label": {
+                  "en": "Balanced (100%)",
+                  "nl": "Gebalanceerd (100%)",
+                  "de": "Ausgeglichen (100%)",
+                  "no": "Balansert (100%)"
+                }
+              },
+              {
+                "id": "130",
+                "label": {
+                  "en": "Sport (130%)",
+                  "nl": "Sport (130%)",
+                  "de": "Sport (130%)",
+                  "no": "Sport (130%)"
+                }
+              },
+              {
+                "id": "160",
+                "label": {
+                  "en": "Ludicrous (160%)",
+                  "nl": "Absurd (160%)",
+                  "de": "Absurd (160%)",
+                  "no": "Galskap (160%)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_fan_speed_pct",
+        "title": {
+          "en": "Set Fan Speed",
+          "nl": "Ventilatorsnelheid instellen",
+          "de": "Lüftergeschwindigkeit setzen",
+          "no": "Sett viftehastighet"
+        },
+        "titleFormatted": {
+          "en": "Set [[fan]] speed to [[percentage]]%",
+          "nl": "Zet [[fan]] snelheid op [[percentage]]%",
+          "de": "Setze [[fan]]-Geschwindigkeit auf [[percentage]]%",
+          "no": "Sett [[fan]]-hastighet til [[percentage]]%"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          },
+          {
+            "name": "fan",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "model",
+                "label": {
+                  "en": "Part Cooling Fan",
+                  "nl": "Objectkoeler",
+                  "de": "Bauteillüfter",
+                  "no": "Delkjølevifte"
+                }
+              },
+              {
+                "id": "aux",
+                "label": {
+                  "en": "Auxiliary Fan",
+                  "nl": "Extra ventilator",
+                  "de": "Zusatzlüfter",
+                  "no": "Ekstravifte"
+                }
+              },
+              {
+                "id": "exhaust",
+                "label": {
+                  "en": "Exhaust Fan",
+                  "nl": "Uitlaatventilator",
+                  "de": "Abluftlüfter",
+                  "no": "Eksosvifte"
+                }
+              }
+            ]
+          },
+          {
+            "name": "percentage",
+            "type": "number",
+            "min": 0,
+            "max": 100
+          }
+        ]
+      },
+      {
+        "id": "set_chamber_light",
+        "title": {
+          "en": "Set Chamber Light",
+          "nl": "Kamerverlichting instellen",
+          "de": "Kammerbeleuchtung setzen",
+          "no": "Sett kammerlys"
+        },
+        "titleFormatted": {
+          "en": "Turn chamber light [[state]]",
+          "nl": "Zet kamerverlichting [[state]]",
+          "de": "Schalte Kammerbeleuchtung [[state]]",
+          "no": "Slå kammerlys [[state]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          },
+          {
+            "name": "state",
+            "type": "checkbox",
+            "label": {
+              "en": "Turn On",
+              "nl": "Aan",
+              "de": "Ein",
+              "no": "På"
+            }
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "is_printing",
+        "title": {
+          "en": "Is Printing",
+          "nl": "Aan het printen",
+          "de": "Druckt",
+          "no": "Skriver ut"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "is_paused",
+        "title": {
+          "en": "Is Paused",
+          "nl": "Gepauzeerd",
+          "de": "Pausiert",
+          "no": "Satt på pause"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "is_offline",
+        "title": {
+          "en": "Is Offline",
+          "nl": "Is offline",
+          "de": "Ist offline",
+          "no": "Er frakoblet"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      },
+      {
+        "id": "is_light_on",
+        "title": {
+          "en": "Chamber Light is On",
+          "nl": "Kamerverlichting is aan",
+          "de": "Kammerbeleuchtung ist ein",
+          "no": "Kammerlys er på"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=elegoo_cc"
+          }
+        ]
+      }
+    ]
   }
 }

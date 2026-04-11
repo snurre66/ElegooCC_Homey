@@ -9,22 +9,22 @@ Integrate your **Elegoo Centauri Carbon** (and other SDCP V3 compatible printers
 
 ## ✨ Features
 
-*   **⚡ Real-Time Monitoring**: Get instant updates on print progress, temperatures, and current layer data.
-*   **🖼️ Live Snapshot Camera**: View your print in real-time through the native Homey Camera UI (integrated MJPEG snapshot support).
-*   **📉 Precision Control**: 
-    *   **Actions**: Pause, Resume, Emergency Stop, and Home Axis.
-    *   **Fine-tuning**: Adjust Part Cooling Fans, Aux Fans, Exhaust Fans, and Chamber Lights.
-    *   **Performance**: Set Speed and Extrusion factors on the fly via Homey Flow.
-*   **🧩 Flow Integration**: 
-    *   **Triggers**: Print Started, Print Finished, Error Detected, Firmware Update Available.
-    *   **Conditions**: Is Printing, Is Paused, Is Offline, Chamber Light state.
-*   **🌍 Fully Localized**: Native support for English, Dutch, German, and Norwegian.
+- **⚡ Real-Time Monitoring**: Get instant updates on print progress, temperatures, and current layer data.
+- **🖼️ Live Snapshot Camera**: View your print in real-time through the native Homey Camera UI (integrated MJPEG snapshot support).
+- **📉 Precision Control**:
+  - **Actions**: Pause, Resume, Emergency Stop, and Home Axis.
+  - **Fine-tuning**: Adjust Part Cooling Fans, Aux Fans, Exhaust Fans, and Chamber Lights.
+  - **Performance**: Set Speed and Extrusion factors on the fly via Homey Flow.
+- **🧩 Flow Integration**:
+  - **Triggers**: Print Started, Print Finished, Error Detected, Firmware Update Available.
+  - **Conditions**: Is Printing, Is Paused, Is Offline, Chamber Light state.
+- **🌍 Fully Localized**: Native support for English, Dutch, German, and Norwegian.
 
 ---
 
 ## 🛠️ Requirements & Setup
 
-1.  **Local API**: Ensure your printer is on the same local network as your Homey Pro. 
+1.  **Local API**: Ensure your printer is on the same local network as your Homey Pro.
 2.  **Pairing**: The app includes an automatic discovery tool. If your printer isn't found automatically, you can add it manually using its IP address and Port (default `3000`).
 
 ---
@@ -43,4 +43,5 @@ For bug reports or feature requests, please visit the [Issue Tracker](https://gi
 This is a community-developed driver utilizing the SDCP V3 local WebSocket protocol. It is not an officially supported Elegoo software product. Use at your own risk.
 
 ---
-*Created with ❤️ by HIDDEN*
+
+_Created with ❤️ by HIDDEN_
