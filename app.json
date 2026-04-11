@@ -434,10 +434,6 @@
           }
         }
       },
-      "images": {
-        "large": "/drivers/elegoo_cc/assets/images/large.png",
-        "small": "/drivers/elegoo_cc/assets/images/small.png"
-      },
       "pair": [
         {
           "id": "add_printer",
@@ -450,7 +446,11 @@
             }
           }
         }
-      ]
+      ],
+      "images": {
+        "large": "/drivers/elegoo_cc/assets/images/large.png",
+        "small": "/drivers/elegoo_cc/assets/images/small.png"
+      }
     }
   ],
   "capabilities": {
