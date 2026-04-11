@@ -1,0 +1,13 @@
+{
+  "pair": {
+    "searching": "Searching for Elegoo printers...",
+    "no_devices": "No printers found automatically.",
+    "add_manual": "Add Manually (IP)",
+    "ip_address": "IP Address",
+    "port": "Port",
+    "add_printer_btn": "Add Printer",
+    "adding": "Adding printer...",
+    "not_found": "Printer not found at this address."
+  },
+  "printer_offline": "Printer Offline"
+}

@@ -1,0 +1,13 @@
+{
+  "pair": {
+    "searching": "Zoeken naar Elegoo-printers...",
+    "no_devices": "Geen printers automatisch gevonden.",
+    "add_manual": "Handmatig toevoegen (IP)",
+    "ip_address": "IP-adres",
+    "port": "Poort",
+    "add_printer_btn": "Printer toevoegen",
+    "adding": "Printer toevoegen...",
+    "not_found": "Printer niet gevonden op dit adres."
+  },
+  "printer_offline": "Printer offline"
+}

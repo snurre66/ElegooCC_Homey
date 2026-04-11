@@ -1,0 +1,13 @@
+{
+  "pair": {
+    "searching": "Søker etter Elegoo-skrivere...",
+    "no_devices": "Ingen skrivere funnet automatisk.",
+    "add_manual": "Legg til manuelt (IP)",
+    "ip_address": "IP-adresse",
+    "port": "Port",
+    "add_printer_btn": "Legg til skriver",
+    "adding": "Legger til skriver...",
+    "not_found": "Skriver ikke funnet på denne adressen."
+  },
+  "printer_offline": "Skriver frakoblet"
+}

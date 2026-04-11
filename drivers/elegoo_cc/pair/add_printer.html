@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="/homey/generic/pair.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 10px;
+      }
+      .device-list {
+        list-style: none;
+        padding: 0;
+      }
+      .device-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        margin-bottom: 8px;
+        background: #f8f8f8;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .device-item:hover {
+        background: #f0f0f0;
+      }
+      .device-info {
+        flex: 1;
+      }
+      .device-name {
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 2px;
+      }
+      .device-address {
+        font-size: 11px;
+        color: #777;
+      }
+      .loading {
+        text-align: center;
+        padding: 15px;
+        font-size: 13px;
+        color: #888;
+      }
+      .manual-toggle {
+        display: block;
+        margin-top: 15px;
+        font-size: 13px;
+        color: #00E5FF;
+        text-decoration: none;
+        text-align: center;
+      }
+      .manual-form {
+        display: none;
+        padding: 15px;
+        border-top: 1px solid #ddd;
+        margin-top: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .error {
+        color: red;
+        display: none;
+        margin-top: 10px;
+        text-align: center;
+      }
+      .button {
+        width: 100%;
+        padding: 10px;
+        background: #00E5FF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .button:disabled {
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="searching" class="loading" data-i18n="pair.searching">
+      Searching for Elegoo printers...
+    </div>
+
+    <ul id="device-list" class="device-list"></ul>
+
+    <div id="no-devices" class="loading" style="display:none;" data-i18n="pair.no_devices">
+      No printers found automatically.
+    </div>
+
+    <a href="#" id="toggle-manual" class="manual-toggle" data-i18n="pair.add_manual">Add Manually (IP)</a>
+
+    <div id="manual-form" class="manual-form">
+      <div class="form-group">
+        <label for="ip" data-i18n="pair.ip_address">IP Address</label>
+        <input type="text" id="ip" placeholder="192.168.1.100" />
+      </div>
+      <div class="form-group">
+        <label for="port" data-i18n="pair.port">Port</label>
+        <input type="number" id="port" value="3000" />
+      </div>
+      <button id="add-manual" class="button" data-i18n="pair.add_printer_btn">Add Printer</button>
+    </div>
+
+    <div id="error" class="error"></div>
+
+    <script type="text/javascript">
+      const searching = document.getElementById('searching');
+      const list = document.getElementById('device-list');
+      const noDevices = document.getElementById('no-devices');
+      const toggleManual = document.getElementById('toggle-manual');
+      const manualForm = document.getElementById('manual-form');
+      const ipInput = document.getElementById('ip');
+      const portInput = document.getElementById('port');
+      const addManualBtn = document.getElementById('add-manual');
+      const errorDiv = document.getElementById('error');
+
+      // Start discovery
+      function discover() {
+        searching.innerText = Homey.__('pair.searching');
+        searching.style.display = 'block';
+        list.innerHTML = '';
+        noDevices.style.display = 'none';
+
+        Homey.emit('discover', null, (err, devices) => {
+          searching.style.display = 'none';
+          if (err) {
+            errorDiv.innerText = err.message || err;
+            errorDiv.style.display = 'block';
+            return;
+          }
+
+          if (!devices || devices.length === 0) {
+            noDevices.style.display = 'block';
+            return;
+          }
+
+          devices.forEach(device => {
+            const li = document.createElement('li');
+            li.className = 'device-item';
+            li.innerHTML = `
+              <div class="device-info">
+                <div class="device-name">${device.name}</div>
+                <div class="device-address">${device.data.id}</div>
+              </div>
+            `;
+            li.addEventListener('click', () => {
+              addDevice(device);
+            });
+            list.appendChild(li);
+          });
+        });
+      }
+
+      function addDevice(device) {
+        errorDiv.style.display = 'none';
+        searching.style.display = 'block';
+        searching.innerText = Homey.__('pair.adding');
+        
+        // Homey.createDevice finalizes the pairing and adds it to the Homey devices list
+        Homey.createDevice(device, (err) => {
+          searching.style.display = 'none';
+          if (err) {
+            errorDiv.innerText = err.message || err;
+            errorDiv.style.display = 'block';
+            return;
+          }
+          
+          // Close the pairing window on success
+          Homey.done();
+        });
+      }
+
+      toggleManual.addEventListener('click', (e) => {
+        e.preventDefault();
+        manualForm.style.display = manualForm.style.display === 'none' ? 'block' : 'none';
+      });
+
+      addManualBtn.addEventListener('click', () => {
+        const ip = ipInput.value.trim();
+        const port = parseInt(portInput.value, 10);
+
+        if (!ip) return;
+
+        addManualBtn.disabled = true;
+        errorDiv.style.display = 'none';
+
+        Homey.emit('validate_manual', { ip, port }, (err, device) => {
+          addManualBtn.disabled = false;
+          if (err) {
+            errorDiv.innerText = err.message || err;
+            errorDiv.style.display = 'block';
+            return;
+          }
+
+          if (device) {
+            addDevice(device);
+          } else {
+            errorDiv.innerText = Homey.__('pair.not_found');
+            errorDiv.style.display = 'block';
+          }
+        });
+      });
+
+      // Start discovery on load
+      discover();
+    </script>
+  </body>
+</html>
