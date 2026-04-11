@@ -1,0 +1,730 @@
+{
+  "name": {
+    "en": "Elegoo Centauri Carbon",
+    "nl": "Elegoo Centauri Carbon",
+    "de": "Elegoo Centauri Carbon",
+    "no": "Elegoo Centauri Carbon"
+  },
+  "class": "other",
+  "capabilities": [
+    "printer_status",
+    "print_progress",
+    "layer_progress",
+    "time_left",
+    "filename",
+    "measure_temperature.nozzle",
+    "target_temperature.nozzle",
+    "measure_temperature.bed",
+    "target_temperature.bed",
+    "measure_temperature",
+    "onoff.chamberlight",
+    "speed_factor",
+    "extrusion_factor",
+    "part_fan_speed",
+    "onoff.auxfan",
+    "onoff.exhaustfan",
+    "alarm_filament",
+    "alarm_contact",
+    "current_layer",
+    "total_layers",
+    "z_position",
+    "firmware_version",
+    "printer_model",
+    "ip_address",
+    "resolution",
+    "onoff.boxfan",
+    "button.pause",
+    "button.resume",
+    "button.stop",
+    "button.home",
+    "x_position",
+    "y_position",
+    "z_offset",
+    "alarm_usb",
+    "mac_address",
+    "memory_remaining"
+  ],
+  "capabilitiesOptions": {
+    "measure_temperature.nozzle": {
+      "title": {
+        "en": "Current Nozzle Temp",
+        "nl": "Huidige nozzle temp",
+        "de": "Aktuelle Düsentemperatur",
+        "no": "Nåværende dysetemperatur"
+      }
+    },
+    "target_temperature.nozzle": {
+      "title": {
+        "en": "Target Nozzle",
+        "nl": "Doel nozzle",
+        "de": "Ziel-Düse",
+        "no": "Måldyse"
+      },
+      "min": 0,
+      "max": 300,
+      "step": 1,
+      "setable": false
+    },
+    "measure_temperature.bed": {
+      "title": {
+        "en": "Current Bed Temp",
+        "nl": "Huidige bed temp",
+        "de": "Aktuelle Betttemperatur",
+        "no": "Nåværende sengetemperatur"
+      }
+    },
+    "target_temperature.bed": {
+      "title": {
+        "en": "Target Bed",
+        "nl": "Doel bed",
+        "de": "Ziel-Bett",
+        "no": "Målseng"
+      },
+      "min": 0,
+      "max": 120,
+      "step": 1,
+      "setable": false
+    },
+    "measure_temperature": {
+      "title": {
+        "en": "Chamber Temperature",
+        "nl": "Kamer temperatuur",
+        "de": "Kammertemperatur",
+        "no": "Kammertemperatur"
+      }
+    },
+    "part_fan_speed": {
+      "title": {
+        "en": "Part Cooling Fan",
+        "nl": "Objectkoeler",
+        "de": "Bauteillüfter",
+        "no": "Delkjølevifte"
+      },
+      "setable": true,
+      "uiComponent": "slider",
+      "min": 0,
+      "max": 100
+    },
+    "print_progress": {
+      "title": {
+        "en": "Print Progress",
+        "nl": "Printvoortgang",
+        "de": "Druckfortschritt",
+        "no": "Utskriftsprogresjon"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "de": "%",
+        "no": "%"
+      },
+      "uiComponent": "slider"
+    },
+    "layer_progress": {
+      "title": {
+        "en": "Layer Progress",
+        "nl": "Laagvoortgang",
+        "de": "Schichtfortschritt",
+        "no": "Lagprogresjon"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "de": "%",
+        "no": "%"
+      },
+      "uiComponent": "slider"
+    },
+    "onoff.chamberlight": {
+      "title": {
+        "en": "Chamber Light",
+        "nl": "Kamerverlichting",
+        "de": "Kammerbeleuchtung",
+        "no": "Kammerlys"
+      }
+    },
+    "onoff.auxfan": {
+      "title": {
+        "en": "Aux Fan",
+        "nl": "Aux ventilator",
+        "de": "Zusatzlüfter",
+        "no": "Aux-vifte"
+      }
+    },
+    "onoff.exhaustfan": {
+      "title": {
+        "en": "Exhaust Fan",
+        "nl": "Uitlaatventilator",
+        "de": "Abluftlüfter",
+        "no": "Eksosvifte"
+      }
+    },
+    "speed_factor": {
+      "title": {
+        "en": "Print Speed Factor",
+        "nl": "Printsnelheidsfactor",
+        "de": "Druckgeschwindigkeitsfaktor",
+        "no": "Utskriftshastighetsfaktor"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "de": "%",
+        "no": "%"
+      },
+      "setable": true,
+      "uiComponent": "slider",
+      "min": 10,
+      "max": 200
+    },
+    "extrusion_factor": {
+      "title": {
+        "en": "Extrusion Factor",
+        "nl": "Extrusiefactor",
+        "de": "Extrusionsfaktor",
+        "no": "Ekstruderingsfaktor"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "de": "%",
+        "no": "%"
+      },
+      "setable": true,
+      "uiComponent": "slider",
+      "min": 10,
+      "max": 200
+    },
+    "onoff.boxfan": {
+      "title": {
+        "en": "Internal Scrubber (Box Fan)",
+        "nl": "Interne scrubber (kastventilator)",
+        "de": "Interner Wäscher (Gehäuselüfter)",
+        "no": "Intern skrubber (boksvifte)"
+      }
+    },
+    "button.pause": {
+      "title": {
+        "en": "Pause Program",
+        "nl": "Programma pauzeren",
+        "de": "Programm pausieren",
+        "no": "Sett program på pause"
+      }
+    },
+    "button.resume": {
+      "title": {
+        "en": "Resume Program",
+        "nl": "Programma hervatten",
+        "de": "Programm fortsetzen",
+        "no": "Gjenoppta program"
+      }
+    },
+    "button.stop": {
+      "title": {
+        "en": "Cancel Program",
+        "nl": "Programma annuleren",
+        "de": "Programm abbrechen",
+        "no": "Avbryt program"
+      }
+    },
+    "button.home": {
+      "title": {
+        "en": "Home All Axes",
+        "nl": "Alle assen home",
+        "de": "Alle Achsen homen",
+        "no": "Hjem alle akser"
+      }
+    },
+    "alarm_filament": {
+      "title": {
+        "en": "Filament Detection Alarm",
+        "nl": "Filamentdetectie alarm",
+        "de": "Filamenterkennungsalarm",
+        "no": "Filamentdeteksjonsalarm"
+      }
+    },
+    "alarm_contact": {
+      "title": {
+        "en": "Door Close Alarm",
+        "nl": "Deur sluit alarm",
+        "de": "Tür-Schließ-Alarm",
+        "no": "Dør lukket-alarm"
+      }
+    },
+    "current_layer": {
+      "title": {
+        "en": "Current Layer",
+        "nl": "Huidige laag",
+        "de": "Aktuelle Schicht",
+        "no": "Nåværende lag"
+      }
+    },
+    "total_layers": {
+      "title": {
+        "en": "Total Layers",
+        "nl": "Totaal aantal lagen",
+        "de": "Gesamtschichten",
+        "no": "Totale lag"
+      }
+    },
+    "z_position": {
+      "title": {
+        "en": "Z Position",
+        "nl": "Z-positie",
+        "de": "Z-Position",
+        "no": "Z-posisjon"
+      },
+      "units": {
+        "en": "mm",
+        "nl": "mm",
+        "de": "mm",
+        "no": "mm"
+      }
+    },
+    "firmware_version": {
+      "title": {
+        "en": "Firmware Version",
+        "nl": "Firmwareversie",
+        "de": "Firmware-Version",
+        "no": "Fastvareversjon"
+      }
+    },
+    "printer_model": {
+      "title": {
+        "en": "Printer Model",
+        "nl": "Printermodel",
+        "de": "Druckermodell",
+        "no": "Skrivermodell"
+      }
+    },
+    "ip_address": {
+      "title": {
+        "en": "Printer IP",
+        "nl": "Printer-IP",
+        "de": "Drucker-IP",
+        "no": "Skriver-IP"
+      }
+    },
+    "resolution": {
+      "title": {
+        "en": "Resolution",
+        "nl": "Resolutie",
+        "de": "Auflösung",
+        "no": "Oppløsning"
+      }
+    },
+    "x_position": {
+      "title": {
+        "en": "X Position",
+        "nl": "X-positie",
+        "de": "X-Position",
+        "no": "X-posisjon"
+      },
+      "units": {
+        "en": "mm",
+        "nl": "mm",
+        "de": "mm",
+        "no": "mm"
+      }
+    },
+    "y_position": {
+      "title": {
+        "en": "Y Position",
+        "nl": "Y-positie",
+        "de": "Y-Position",
+        "no": "Y-posisjon"
+      },
+      "units": {
+        "en": "mm",
+        "nl": "mm",
+        "de": "mm",
+        "no": "mm"
+      }
+    },
+    "z_offset": {
+      "title": {
+        "en": "Z Offset",
+        "nl": "Z-offset",
+        "de": "Z-Versatz",
+        "no": "Z-forskyvning"
+      },
+      "units": {
+        "en": "mm",
+        "nl": "mm",
+        "de": "mm",
+        "no": "mm"
+      }
+    },
+    "alarm_usb": {
+      "title": {
+        "en": "USB Disk Status",
+        "nl": "USB-schijfstatus",
+        "de": "USB-Laufwerksstatus",
+        "no": "USB-diskstatus"
+      }
+    },
+    "mac_address": {
+      "title": {
+        "en": "Mainboard MAC",
+        "nl": "Moederbord MAC",
+        "de": "Mainboard-MAC",
+        "no": "Hovedkort-MAC"
+      }
+    },
+    "memory_remaining": {
+      "title": {
+        "en": "Remaining Memory",
+        "nl": "Resterend geheugen",
+        "de": "Verbleibender Speicher",
+        "no": "Gjenværende minne"
+      }
+    }
+  },
+  "images": {
+    "large": "/drivers/elegoo_cc/assets/images/large.png",
+    "small": "/drivers/elegoo_cc/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "add_printer",
+      "options": {
+        "title": {
+          "en": "Add Elegoo Printer",
+          "nl": "Elegoo printer toevoegen",
+          "de": "Elegoo-Drucker hinzufügen",
+          "no": "Legg til Elegoo-skriver"
+        }
+      }
+    }
+  ],
+  "flow": {
+    "triggers": [
+      {
+        "id": "print_started",
+        "title": {
+          "en": "Print Started",
+          "nl": "Print gestart",
+          "de": "Druck gestartet",
+          "no": "Utskrift startet"
+        }
+      },
+      {
+        "id": "print_finished",
+        "title": {
+          "en": "Print Finished",
+          "nl": "Print voltooid",
+          "de": "Druck beendet",
+          "no": "Utskrift fullført"
+        }
+      },
+      {
+        "id": "printer_offline",
+        "title": {
+          "en": "Printer Offline",
+          "nl": "Printer offline",
+          "de": "Drucker offline",
+          "no": "Skriver frakoblet"
+        }
+      },
+      {
+        "id": "fw_update_available",
+        "title": {
+          "en": "Firmware Update Available",
+          "nl": "Firmware-update beschikbaar",
+          "de": "Firmware-Update verfügbar",
+          "no": "Fastvareoppdatering tilgjengelig"
+        }
+      },
+      {
+        "id": "error_detected",
+        "title": {
+          "en": "Error Detected",
+          "nl": "Fout gedetecteerd",
+          "de": "Fehler erkannt",
+          "no": "Feil oppdaget"
+        },
+        "tokens": [
+          {
+            "id": "error_msg",
+            "name": "error_msg",
+            "type": "string",
+            "title": {
+              "en": "Error Message",
+              "nl": "Foutmelding",
+              "de": "Fehlermeldung",
+              "no": "Feilmelding"
+            }
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "emergency_stop",
+        "title": {
+          "en": "Emergency Stop",
+          "nl": "Noodstop",
+          "de": "Notaus",
+          "no": "Nødstopp"
+        }
+      },
+      {
+        "id": "pause_print",
+        "title": {
+          "en": "Pause Print",
+          "nl": "Print pauzeren",
+          "de": "Druck pausieren",
+          "no": "Sett utskrift på pause"
+        }
+      },
+      {
+        "id": "resume_print",
+        "title": {
+          "en": "Resume Print",
+          "nl": "Print hervatten",
+          "de": "Druck fortsetzen",
+          "no": "Gjenoppta utskrift"
+        }
+      },
+      {
+        "id": "home_axes",
+        "title": {
+          "en": "Home Axes",
+          "nl": "Assen home",
+          "de": "Achsen homen",
+          "no": "Hjem akser"
+        },
+        "titleFormatted": {
+          "en": "Home [[axes]]",
+          "nl": "[[axes]] home",
+          "de": "[[axes]] homen",
+          "no": "Hjem [[axes]]"
+        },
+        "args": [
+          {
+            "name": "axes",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "XYZ",
+                "label": {
+                  "en": "All (XYZ)",
+                  "nl": "Alle (XYZ)",
+                  "de": "Alle (XYZ)",
+                  "no": "Alle (XYZ)"
+                }
+              },
+              {
+                "id": "X",
+                "label": {
+                  "en": "X Axis",
+                  "nl": "X-as",
+                  "de": "X-Achse",
+                  "no": "X-akse"
+                }
+              },
+              {
+                "id": "Y",
+                "label": {
+                  "en": "Y Axis",
+                  "nl": "Y-as",
+                  "de": "Y-Achse",
+                  "no": "Y-akse"
+                }
+              },
+              {
+                "id": "Z",
+                "label": {
+                  "en": "Z Axis",
+                  "nl": "Z-as",
+                  "de": "Z-Achse",
+                  "no": "Z-akse"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_speed_preset",
+        "title": {
+          "en": "Set Speed Preset",
+          "nl": "Snelheidsvoorinstelling instellen",
+          "de": "Geschwindigkeits-Preset setzen",
+          "no": "Angi hastighetsforinnstilling"
+        },
+        "titleFormatted": {
+          "en": "Set speed to [[preset]]%",
+          "nl": "Zet snelheid op [[preset]]%",
+          "de": "Geschwindigkeit auf [[preset]]% setzen",
+          "no": "Sett hastighet til [[preset]]%"
+        },
+        "args": [
+          {
+            "name": "preset",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "50",
+                "label": {
+                  "en": "Silent (50%)",
+                  "nl": "Stil (50%)",
+                  "de": "Leise (50%)",
+                  "no": "Stille (50%)"
+                }
+              },
+              {
+                "id": "100",
+                "label": {
+                  "en": "Balanced (100%)",
+                  "nl": "Gebalanceerd (100%)",
+                  "de": "Ausgeglichen (100%)",
+                  "no": "Balansert (100%)"
+                }
+              },
+              {
+                "id": "130",
+                "label": {
+                  "en": "Sport (130%)",
+                  "nl": "Sport (130%)",
+                  "de": "Sport (130%)",
+                  "no": "Sport (130%)"
+                }
+              },
+              {
+                "id": "160",
+                "label": {
+                  "en": "Ludicrous (160%)",
+                  "nl": "Absurd (160%)",
+                  "de": "Absurd (160%)",
+                  "no": "Latterlig (160%)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_fan_speed_pct",
+        "title": {
+          "en": "Set Fan Speed",
+          "nl": "Ventilatorsnelheid instellen",
+          "de": "Lüftergeschwindigkeit setzen",
+          "no": "Sett viftehastighet"
+        },
+        "titleFormatted": {
+          "en": "Set [[fan]] speed to [[percentage]]%",
+          "nl": "Zet [[fan]] snelheid op [[percentage]]%",
+          "de": "Setze [[fan]]-Geschwindigkeit auf [[percentage]]%",
+          "no": "Sett [[fan]]-hastighet til [[percentage]]%"
+        },
+        "args": [
+          {
+            "name": "fan",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "model",
+                "label": {
+                  "en": "Part Cooling Fan",
+                  "nl": "Objectkoeler",
+                  "de": "Bauteillüfter",
+                  "no": "Delkjølevifte"
+                }
+              },
+              {
+                "id": "aux",
+                "label": {
+                  "en": "Auxiliary Fan",
+                  "nl": "Extra ventilator",
+                  "de": "Zusatzlüfter",
+                  "no": "Ekstravifte"
+                }
+              },
+              {
+                "id": "exhaust",
+                "label": {
+                  "en": "Exhaust Fan",
+                  "nl": "Uitlaatventilator",
+                  "de": "Abluftlüfter",
+                  "no": "Eksosvifte"
+                }
+              }
+            ]
+          },
+          {
+            "name": "percentage",
+            "type": "number",
+            "min": 0,
+            "max": 100
+          }
+        ]
+      },
+      {
+        "id": "set_chamber_light",
+        "title": {
+          "en": "Set Chamber Light",
+          "nl": "Kamerverlichting instellen",
+          "de": "Kammerbeleuchtung setzen",
+          "no": "Sett kammerlys"
+        },
+        "titleFormatted": {
+          "en": "Turn chamber light [[state]]",
+          "nl": "Zet kamerverlichting [[state]]",
+          "de": "Schalte Kammerbeleuchtung [[state]]",
+          "no": "Slå kammerlys [[state]]"
+        },
+        "args": [
+          {
+            "name": "state",
+            "type": "checkbox",
+            "label": {
+              "en": "Turn On",
+              "nl": "Aan",
+              "de": "Ein",
+              "no": "På"
+            }
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "is_printing",
+        "title": {
+          "en": "Is Printing",
+          "nl": "Aan het printen",
+          "de": "Druckt",
+          "no": "Skriver ut"
+        }
+      },
+      {
+        "id": "is_paused",
+        "title": {
+          "en": "Is Paused",
+          "nl": "Gepauzeerd",
+          "de": "Pausiert",
+          "no": "Satt på pause"
+        }
+      },
+      {
+        "id": "is_offline",
+        "title": {
+          "en": "Is Offline",
+          "nl": "Is offline",
+          "de": "Ist offline",
+          "no": "Er frakoblet"
+        }
+      },
+      {
+        "id": "is_light_on",
+        "title": {
+          "en": "Chamber Light is On",
+          "nl": "Kamerverlichting is aan",
+          "de": "Kammerbeleuchtung ist ein",
+          "no": "Kammerlys er på"
+        }
+      }
+    ]
+  }
+}

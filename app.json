@@ -1,4 +1,5 @@
 {
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.elegoo.sdcp",
   "name": {
     "en": "Elegoo SDCP Printers",
@@ -64,7 +65,6 @@
   },
   "drivers": [
     {
-      "id": "elegoo_cc",
       "name": {
         "en": "Elegoo Centauri Carbon",
         "nl": "Elegoo Centauri Carbon",
@@ -792,37 +792,99 @@
             }
           }
         ]
-      }
+      },
+      "id": "elegoo_cc"
     }
   ],
   "capabilities": {
-    "printer_status": {
-      "type": "string",
+    "alarm_filament": {
+      "type": "boolean",
       "title": {
-        "en": "Printer Status",
-        "nl": "Printerstatus",
-        "de": "Druckerstatus",
-        "no": "Skriverstatus"
+        "en": "Filament Detection Alarm",
+        "nl": "Filamentdetectie alarm",
+        "de": "Filamenterkennungsalarm",
+        "no": "Filamentdeteksjonsalarm"
       },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "/assets/icons/printer_status.svg"
+      "icon": "/assets/icons/filament_alarm.svg"
     },
-    "print_progress": {
-      "type": "number",
+    "alarm_usb": {
+      "type": "boolean",
       "title": {
-        "en": "Print Progress",
-        "nl": "Printvoortgang",
-        "de": "Druckfortschritt",
-        "no": "Utskriftsprogresjon"
+        "en": "USB Disk Status",
+        "nl": "USB-schijfstatus",
+        "de": "USB-Laufwerksstatus",
+        "no": "USB-diskstatus"
       },
       "getable": true,
       "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/usb_alarm.svg"
+    },
+    "current_layer": {
+      "type": "number",
+      "title": {
+        "en": "Current Layer",
+        "nl": "Huidige laag",
+        "de": "Aktuelle Schicht",
+        "no": "Nåværende lag"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/icons/layer_progress.svg"
+    },
+    "extrusion_factor": {
+      "type": "number",
+      "title": {
+        "en": "Extrusion Factor",
+        "nl": "Extrusiefactor",
+        "de": "Extrusionsfaktor",
+        "no": "Ekstruderingsfaktor"
+      },
+      "getable": true,
+      "setable": true,
       "units": "%",
       "min": 0,
-      "max": 100,
-      "icon": "/assets/icons/print_progress.svg"
+      "max": 200,
+      "step": 1
+    },
+    "filename": {
+      "type": "string",
+      "title": {
+        "en": "File Name",
+        "nl": "Bestandsnaam",
+        "de": "Dateiname",
+        "no": "Filnavn"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/icons/filename.svg"
+    },
+    "firmware_version": {
+      "type": "string",
+      "title": {
+        "en": "Firmware Version",
+        "nl": "Firmwareversie",
+        "de": "Firmware-Version",
+        "no": "Fastvareversjon"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/icons/info.svg"
+    },
+    "ip_address": {
+      "type": "string",
+      "title": {
+        "en": "Printer IP",
+        "nl": "Printer-IP",
+        "de": "Drucker-IP",
+        "no": "Skriver-IP"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/icons/info.svg"
     },
     "layer_progress": {
       "type": "number",
@@ -839,17 +901,111 @@
       "max": 100,
       "icon": "/assets/icons/layer_progress.svg"
     },
-    "filename": {
+    "mac_address": {
       "type": "string",
       "title": {
-        "en": "File Name",
-        "nl": "Bestandsnaam",
-        "de": "Dateiname",
-        "no": "Filnavn"
+        "en": "MAC Address",
+        "nl": "MAC-adres",
+        "de": "MAC-Adresse",
+        "no": "MAC-adresse"
       },
       "getable": true,
       "setable": false,
-      "icon": "/assets/icons/filename.svg"
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/mac_address.svg"
+    },
+    "memory_remaining": {
+      "type": "number",
+      "title": {
+        "en": "Remaining Memory",
+        "nl": "Resterend geheugen",
+        "de": "Verbleibender Speicher",
+        "no": "Gjenværende minne"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/memory.svg"
+    },
+    "part_fan_speed": {
+      "type": "number",
+      "title": {
+        "en": "Part Fan Speed",
+        "nl": "Ventilatorsnelheid objectkoeler",
+        "de": "Bauteillüftergeschwindigkeit",
+        "no": "Delkjøleviftehastighet"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "icon": "/assets/icons/part_fan_speed.svg"
+    },
+    "print_progress": {
+      "type": "number",
+      "title": {
+        "en": "Print Progress",
+        "nl": "Printvoortgang",
+        "de": "Druckfortschritt",
+        "no": "Utskriftsprogresjon"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "min": 0,
+      "max": 100,
+      "icon": "/assets/icons/print_progress.svg"
+    },
+    "printer_model": {
+      "type": "string",
+      "title": {
+        "en": "Printer Model",
+        "nl": "Printermodel",
+        "de": "Druckermodell",
+        "no": "Skrivermodell"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/icons/info.svg"
+    },
+    "printer_status": {
+      "type": "string",
+      "title": {
+        "en": "Printer Status",
+        "nl": "Printerstatus",
+        "de": "Druckerstatus",
+        "no": "Skriverstatus"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/printer_status.svg"
+    },
+    "resolution": {
+      "type": "string",
+      "title": {
+        "en": "Resolution",
+        "nl": "Resolutie",
+        "de": "Auflösung",
+        "no": "Oppløsning"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/icons/info.svg"
+    },
+    "speed_factor": {
+      "type": "number",
+      "title": {
+        "en": "Speed Factor",
+        "nl": "Snelheidsfactor",
+        "de": "Geschwindigkeitsfaktor",
+        "no": "Hastighetsfaktor"
+      },
+      "getable": true,
+      "setable": true,
+      "units": "%",
+      "min": 0,
+      "max": 200,
+      "step": 1
     },
     "time_left": {
       "type": "number",
@@ -869,74 +1025,6 @@
       },
       "icon": "/assets/icons/time_left.svg"
     },
-    "extrusion_factor": {
-      "type": "number",
-      "title": {
-        "en": "Extrusion Factor",
-        "nl": "Extrusiefactor",
-        "de": "Extrusionsfaktor",
-        "no": "Ekstruderingsfaktor"
-      },
-      "getable": true,
-      "setable": true,
-      "units": "%",
-      "min": 0,
-      "max": 200,
-      "step": 1
-    },
-    "speed_factor": {
-      "type": "number",
-      "title": {
-        "en": "Speed Factor",
-        "nl": "Snelheidsfactor",
-        "de": "Geschwindigkeitsfaktor",
-        "no": "Hastighetsfaktor"
-      },
-      "getable": true,
-      "setable": true,
-      "units": "%",
-      "min": 0,
-      "max": 200,
-      "step": 1
-    },
-    "part_fan_speed": {
-      "type": "number",
-      "title": {
-        "en": "Part Fan Speed",
-        "nl": "Ventilatorsnelheid objectkoeler",
-        "de": "Bauteillüftergeschwindigkeit",
-        "no": "Delkjøleviftehastighet"
-      },
-      "getable": true,
-      "setable": false,
-      "units": "%",
-      "icon": "/assets/icons/part_fan_speed.svg"
-    },
-    "alarm_filament": {
-      "type": "boolean",
-      "title": {
-        "en": "Filament Detection Alarm",
-        "nl": "Filamentdetectie alarm",
-        "de": "Filamenterkennungsalarm",
-        "no": "Filamentdeteksjonsalarm"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/filament_alarm.svg"
-    },
-    "current_layer": {
-      "type": "number",
-      "title": {
-        "en": "Current Layer",
-        "nl": "Huidige laag",
-        "de": "Aktuelle Schicht",
-        "no": "Nåværende lag"
-      },
-      "getable": true,
-      "setable": false,
-      "icon": "/assets/icons/layer_progress.svg"
-    },
     "total_layers": {
       "type": "number",
       "title": {
@@ -948,19 +1036,6 @@
       "getable": true,
       "setable": false,
       "icon": "/assets/icons/layer_progress.svg"
-    },
-    "z_position": {
-      "type": "number",
-      "title": {
-        "en": "Z Position",
-        "nl": "Z-positie",
-        "de": "Z-Position",
-        "no": "Z-posisjon"
-      },
-      "getable": true,
-      "setable": false,
-      "units": "mm",
-      "icon": "/assets/icons/z_position.svg"
     },
     "x_position": {
       "type": "number",
@@ -1004,92 +1079,18 @@
       "uiComponent": "sensor",
       "icon": "/assets/icons/z_offset.svg"
     },
-    "alarm_usb": {
-      "type": "boolean",
-      "title": {
-        "en": "USB Disk Status",
-        "nl": "USB-schijfstatus",
-        "de": "USB-Laufwerksstatus",
-        "no": "USB-diskstatus"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/usb_alarm.svg"
-    },
-    "memory_remaining": {
+    "z_position": {
       "type": "number",
       "title": {
-        "en": "Remaining Memory",
-        "nl": "Resterend geheugen",
-        "de": "Verbleibender Speicher",
-        "no": "Gjenværende minne"
+        "en": "Z Position",
+        "nl": "Z-positie",
+        "de": "Z-Position",
+        "no": "Z-posisjon"
       },
       "getable": true,
       "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/memory.svg"
-    },
-    "mac_address": {
-      "type": "string",
-      "title": {
-        "en": "MAC Address",
-        "nl": "MAC-adres",
-        "de": "MAC-Adresse",
-        "no": "MAC-adresse"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/mac_address.svg"
-    },
-    "firmware_version": {
-      "type": "string",
-      "title": {
-        "en": "Firmware Version",
-        "nl": "Firmwareversie",
-        "de": "Firmware-Version",
-        "no": "Fastvareversjon"
-      },
-      "getable": true,
-      "setable": false,
-      "icon": "/assets/icons/info.svg"
-    },
-    "printer_model": {
-      "type": "string",
-      "title": {
-        "en": "Printer Model",
-        "nl": "Printermodel",
-        "de": "Druckermodell",
-        "no": "Skrivermodell"
-      },
-      "getable": true,
-      "setable": false,
-      "icon": "/assets/icons/info.svg"
-    },
-    "ip_address": {
-      "type": "string",
-      "title": {
-        "en": "Printer IP",
-        "nl": "Printer-IP",
-        "de": "Drucker-IP",
-        "no": "Skriver-IP"
-      },
-      "getable": true,
-      "setable": false,
-      "icon": "/assets/icons/info.svg"
-    },
-    "resolution": {
-      "type": "string",
-      "title": {
-        "en": "Resolution",
-        "nl": "Resolutie",
-        "de": "Auflösung",
-        "no": "Oppløsning"
-      },
-      "getable": true,
-      "setable": false,
-      "icon": "/assets/icons/info.svg"
+      "units": "mm",
+      "icon": "/assets/icons/z_position.svg"
     }
   }
 }
