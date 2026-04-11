@@ -42,7 +42,7 @@ class ElegooCCDevice extends PrinterDevice {
         try {
           const buffer = await this._fetchSnapshotBuffer();
           const snapshot = new Duplex();
-          
+
           if (buffer && buffer.length > 0) {
             this.log(`Camera: pushing frame of ${buffer.length} bytes`);
             snapshot.push(buffer);
@@ -51,7 +51,7 @@ class ElegooCCDevice extends PrinterDevice {
             snapshot.push(null);
             return snapshot.pipe(stream);
           }
-          
+
           snapshot.push(null); // End of stream
           return snapshot.pipe(stream);
         } catch (error) {
@@ -76,7 +76,7 @@ class ElegooCCDevice extends PrinterDevice {
 
       // Refresh every 10 seconds
       this.homey.setInterval(() => {
-        this.snapshotImage.update().catch(() => {});
+        this.snapshotImage.update().catch(() => { });
       }, 10000);
 
     } catch (err) {
@@ -152,13 +152,13 @@ class ElegooCCDevice extends PrinterDevice {
 
   registerFlowCards() {
     // Actions
-    this.homey.flow.getDeviceActionCard('emergency_stop').registerRunListener(async (args, state) => this.onActionEmergencyStop());
-    this.homey.flow.getDeviceActionCard('pause_print').registerRunListener(async (args, state) => this.onActionPause());
-    this.homey.flow.getDeviceActionCard('resume_print').registerRunListener(async (args, state) => this.onActionResume());
-    this.homey.flow.getDeviceActionCard('home_axes').registerRunListener(async (args, state) => this.onActionHome(args));
-    this.homey.flow.getDeviceActionCard('set_speed_preset').registerRunListener(async (args, state) => this.onActionSetSpeedPreset(args));
-    this.homey.flow.getDeviceActionCard('set_fan_speed_pct').registerRunListener(async (args, state) => this.onActionSetFanSpeed(args));
-    this.homey.flow.getDeviceActionCard('set_chamber_light').registerRunListener(async (args, state) => this.onActionSetLight(args.state));
+    this.homey.flow.getActionCard('emergency_stop').registerRunListener(async (args, state) => this.onActionEmergencyStop());
+    this.homey.flow.getActionCard('pause_print').registerRunListener(async (args, state) => this.onActionPause());
+    this.homey.flow.getActionCard('resume_print').registerRunListener(async (args, state) => this.onActionResume());
+    this.homey.flow.getActionCard('home_axes').registerRunListener(async (args, state) => this.onActionHome(args));
+    this.homey.flow.getActionCard('set_speed_preset').registerRunListener(async (args, state) => this.onActionSetSpeedPreset(args));
+    this.homey.flow.getActionCard('set_fan_speed_pct').registerRunListener(async (args, state) => this.onActionSetFanSpeed(args));
+    this.homey.flow.getActionCard('set_chamber_light').registerRunListener(async (args, state) => this.onActionSetLight(args.state));
 
     // Conditions
     this.homey.flow.getDeviceConditionCard('is_printing').registerRunListener(async (args, state) => {
