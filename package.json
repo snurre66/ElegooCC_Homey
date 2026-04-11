@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Homey App for Elegoo 3D Printers using SDCP V3",
   "main": "app.js",
-  "author": "HIDDEN <hidden@example.com>",
+  "author": "<HIDDEN>",
   "repository": {
     "type": "git",
     "url": "https://github.com/snurre66/elegoo-homey.git"
@@ -21,6 +21,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "publish:safe": "node .scripts/homey-publish.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
     "format": "prettier --write \"**/*.{js,json,md}\"",

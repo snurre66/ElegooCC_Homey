@@ -26,3 +26,9 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Personal credentials - NEVER commit this!
+.secret.json
+
+# Scratch/debug scripts
+scratch/

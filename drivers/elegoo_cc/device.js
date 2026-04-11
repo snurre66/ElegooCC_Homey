@@ -21,6 +21,9 @@ class ElegooCCDevice extends PrinterDevice {
     this._reachedNozzle = false;
     this._reachedBed = false;
     this._firedChamber = new Set();
+    this._prevCamEnabled = null;
+    this._prevMotors = null;
+    this._prevStreamCount = null;
 
     // Set static info from settings if available
     const settings = this.getSettings();
@@ -375,6 +378,50 @@ class ElegooCCDevice extends PrinterDevice {
     if (attributes.MainboardMAC !== undefined) this.safeSetCapabilityValue('mac_address', attributes.MainboardMAC);
     if (attributes.RemainingMemory !== undefined) {
       this.safeSetCapabilityValue('memory_remaining', attributes.RemainingMemory);
+    }
+
+    // --- Idle Telemetry (Network, Camera, Motors) ---
+    if (attributes.NetworkStatus !== undefined) {
+      this.safeSetCapabilityValue('network_type', attributes.NetworkStatus);
+    }
+    if (attributes.CameraStatus !== undefined) {
+      const isEnabled = attributes.CameraStatus === 1;
+      if (this._prevCamEnabled !== null && this._prevCamEnabled !== isEnabled) {
+        this.homey.flow
+          .getTriggerCard('camera_status_changed')
+          .trigger(this, { state: isEnabled ? 'enabled' : 'disabled' })
+          .catch((err) => this.error('Trigger camera_status_changed failed', err));
+      }
+      this._prevCamEnabled = isEnabled;
+      this.safeSetCapabilityValue('camera_enabled', isEnabled);
+    }
+    if (attributes.NumberOfVideoStreamConnected !== undefined) {
+      const count = attributes.NumberOfVideoStreamConnected;
+      if (this._prevStreamCount === 0 && count > 0) {
+        this.homey.flow
+          .getTriggerCard('video_stream_started')
+          .trigger(this)
+          .catch((err) => this.error(err));
+      } else if (this._prevStreamCount > 0 && count === 0) {
+        this.homey.flow
+          .getTriggerCard('video_stream_stopped')
+          .trigger(this)
+          .catch((err) => this.error(err));
+      }
+      this._prevStreamCount = count;
+      this.safeSetCapabilityValue('video_stream_count', count);
+    }
+    if (attributes.DevicesStatus) {
+      const ds = attributes.DevicesStatus;
+      const engaged = ds.XMotorStatus === 1 || ds.YMotorStatus === 1 || ds.ZMotorStatus === 1 || ds.SgStatus === 1;
+      if (this._prevMotors !== null && this._prevMotors !== engaged) {
+        this.homey.flow
+          .getTriggerCard('motors_status_changed')
+          .trigger(this, { state: engaged ? 'engaged' : 'disengaged' })
+          .catch((err) => this.error('Trigger motors_status_changed failed', err));
+      }
+      this._prevMotors = engaged;
+      this.safeSetCapabilityValue('motors_engaged', engaged);
     }
 
     // --- Status ---
