@@ -16,9 +16,9 @@ Then fill in your actual values:
 
 ```json
 {
-  "AUTHOR_NAME": "HIDDEN",
-  "AUTHOR_EMAIL": "hidden@example.com",
-  "PAYPAL_USERNAME": "HIDDEN"
+  "AUTHOR_NAME": "Your Full Name",
+  "AUTHOR_EMAIL": "your@email.com",
+  "PAYPAL_USERNAME": "your-paypal-username"
 }
 ```
 
