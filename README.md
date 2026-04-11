@@ -32,7 +32,7 @@ Integrate your **Elegoo Centauri Carbon** (and other SDCP V3 compatible printers
 ## 🤝 Support & Contribution
 
 If you find this app useful, consider supporting the development!  
-💰 **Donate via PayPal**: [paypal.me/HIDDEN](https://paypal.me/HIDDEN)
+💰 **Donate via PayPal**: [paypal.me/thomasveivag](https://paypal.me/thomasveivag)
 
 For bug reports or feature requests, please visit the [Issue Tracker](https://github.com/snurre66/elegoo-homey/issues).
 
