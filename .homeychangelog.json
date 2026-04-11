@@ -1,0 +1,8 @@
+{
+  "1.0.0": {
+    "en": "Added secrets json file and publish:safe"
+  },
+  "1.0.1": {
+    "en": "Due to git implemented secrets.json and publish:safe"
+  }
+}
