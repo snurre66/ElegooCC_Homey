@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "Due to git implemented secrets.json and publish:safe"
+  },
+  "1.1.0": {
+    "en": "Fixed flows. getTriggerCard -> getDeviceTriggerCard"
   }
 }
