@@ -170,7 +170,7 @@ class ElegooCCDevice extends PrinterDevice {
   }
 
   registerFlowCards() {
-    // Actions
+    // --- Actions ---
     this.homey.flow
       .getActionCard('emergency_stop')
       .registerRunListener(async (_args, _state) => this.onActionEmergencyStop());
@@ -187,7 +187,7 @@ class ElegooCCDevice extends PrinterDevice {
       .getActionCard('set_chamber_light')
       .registerRunListener(async (args, _state) => this.onActionSetLight(args.state));
 
-    // Conditions
+    // --- Conditions ---
     this.homey.flow.getConditionCard('is_printing').registerRunListener(async (_args, _state) => {
       return this.getCapabilityValue('printer_status') === 'Printing';
     });
@@ -200,6 +200,29 @@ class ElegooCCDevice extends PrinterDevice {
     this.homey.flow.getConditionCard('is_light_on').registerRunListener(async (_args, _state) => {
       return this.getCapabilityValue('onoff.chamberlight') === true;
     });
+
+    // --- Triggers (Cached for performance and SDK compliance) ---
+    const flow = this.homey.flow;
+    this.triggerCameraStatusChanged = flow.getDeviceTriggerCard('camera_status_changed');
+    this.triggerVideoStreamStarted = flow.getDeviceTriggerCard('video_stream_started');
+    this.triggerVideoStreamStopped = flow.getDeviceTriggerCard('video_stream_stopped');
+    this.triggerMotorsStatusChanged = flow.getDeviceTriggerCard('motors_status_changed');
+    this.triggerFwUpdateAvailable = flow.getDeviceTriggerCard('fw_update_available');
+    this.triggerFilamentRunout = flow.getDeviceTriggerCard('filament_runout');
+    this.triggerDoorStatusChanged = flow.getDeviceTriggerCard('door_status_changed');
+    this.triggerUsbStatusChanged = flow.getDeviceTriggerCard('usb_status_changed');
+    this.triggerProgressReached = flow.getDeviceTriggerCard('progress_reached');
+    this.triggerLayerReached = flow.getDeviceTriggerCard('layer_reached');
+    this.triggerNozzleTempReached = flow.getDeviceTriggerCard('nozzle_temp_reached');
+    this.triggerBedTempReached = flow.getDeviceTriggerCard('bed_temp_reached');
+    this.triggerChamberTempReached = flow.getDeviceTriggerCard('chamber_temp_reached');
+    this.triggerPrintStarted = flow.getDeviceTriggerCard('print_started');
+    this.triggerPrintResumed = flow.getDeviceTriggerCard('print_resumed');
+    this.triggerPrintFinished = flow.getDeviceTriggerCard('print_finished');
+    this.triggerPrintPaused = flow.getDeviceTriggerCard('print_paused');
+    this.triggerPrintCancelled = flow.getDeviceTriggerCard('print_cancelled');
+    this.triggerErrorDetected = flow.getDeviceTriggerCard('error_detected');
+    this.triggerStatusChanged = flow.getDeviceTriggerCard('status_changed');
   }
 
   registerListeners() {
@@ -387,10 +410,11 @@ class ElegooCCDevice extends PrinterDevice {
     if (attributes.CameraStatus !== undefined) {
       const isEnabled = attributes.CameraStatus === 1;
       if (this._prevCamEnabled !== null && this._prevCamEnabled !== isEnabled) {
-        this.homey.flow
-          .getTriggerCard('camera_status_changed')
-          .trigger(this, { state: isEnabled ? 'enabled' : 'disabled' })
-          .catch((err) => this.error('Trigger camera_status_changed failed', err));
+        if (this.triggerCameraStatusChanged) {
+          this.triggerCameraStatusChanged
+            .trigger(this, { state: isEnabled ? 'enabled' : 'disabled' })
+            .catch((err) => this.log('[Warning] Trigger camera_status_changed failed:', err.message));
+        }
       }
       this._prevCamEnabled = isEnabled;
       this.safeSetCapabilityValue('camera_enabled', isEnabled);
@@ -398,15 +422,17 @@ class ElegooCCDevice extends PrinterDevice {
     if (attributes.NumberOfVideoStreamConnected !== undefined) {
       const count = attributes.NumberOfVideoStreamConnected;
       if (this._prevStreamCount === 0 && count > 0) {
-        this.homey.flow
-          .getTriggerCard('video_stream_started')
-          .trigger(this)
-          .catch((err) => this.error(err));
+        if (this.triggerVideoStreamStarted) {
+          this.triggerVideoStreamStarted
+            .trigger(this)
+            .catch((err) => this.error('Trigger video_stream_started failed:', err.message));
+        }
       } else if (this._prevStreamCount > 0 && count === 0) {
-        this.homey.flow
-          .getTriggerCard('video_stream_stopped')
-          .trigger(this)
-          .catch((err) => this.error(err));
+        if (this.triggerVideoStreamStopped) {
+          this.triggerVideoStreamStopped
+            .trigger(this)
+            .catch((err) => this.error('Trigger video_stream_stopped failed:', err.message));
+        }
       }
       this._prevStreamCount = count;
       this.safeSetCapabilityValue('video_stream_count', count);
@@ -415,10 +441,11 @@ class ElegooCCDevice extends PrinterDevice {
       const ds = attributes.DevicesStatus;
       const engaged = ds.XMotorStatus === 1 || ds.YMotorStatus === 1 || ds.ZMotorStatus === 1 || ds.SgStatus === 1;
       if (this._prevMotors !== null && this._prevMotors !== engaged) {
-        this.homey.flow
-          .getTriggerCard('motors_status_changed')
-          .trigger(this, { state: engaged ? 'engaged' : 'disengaged' })
-          .catch((err) => this.error('Trigger motors_status_changed failed', err));
+        if (this.triggerMotorsStatusChanged) {
+          this.triggerMotorsStatusChanged
+            .trigger(this, { state: engaged ? 'engaged' : 'disengaged' })
+            .catch((err) => this.error('Trigger motors_status_changed failed:', err.message));
+        }
       }
       this._prevMotors = engaged;
       this.safeSetCapabilityValue('motors_engaged', engaged);
@@ -511,7 +538,7 @@ class ElegooCCDevice extends PrinterDevice {
 
     // --- FW Update ---
     if (attributes.FwUpdate) {
-      this.homey.flow.getTriggerCard('fw_update_available').trigger(this).catch(this.error);
+      if (this.triggerFwUpdateAvailable) this.triggerFwUpdateAvailable.trigger(this).catch(this.error);
     }
 
     // --- Thumbnail ---
@@ -522,7 +549,7 @@ class ElegooCCDevice extends PrinterDevice {
     // --- Sensor Transition Triggers ---
     if (attributes.Filament !== undefined) {
       if (this._prevFilament === 1 && attributes.Filament === 0) {
-        this.homey.flow.getTriggerCard('filament_runout').trigger(this).catch(this.error);
+        if (this.triggerFilamentRunout) this.triggerFilamentRunout.trigger(this).catch(this.error);
       }
       this._prevFilament = attributes.Filament;
     }
@@ -530,7 +557,7 @@ class ElegooCCDevice extends PrinterDevice {
     if (attributes.Door !== undefined) {
       if (this._prevDoor !== null && this._prevDoor !== attributes.Door) {
         const state = attributes.Door === 1 ? 'opened' : 'closed';
-        this.homey.flow.getTriggerCard('door_status_changed').trigger(this, { state }).catch(this.error);
+        if (this.triggerDoorStatusChanged) this.triggerDoorStatusChanged.trigger(this, { state }).catch(this.error);
       }
       this._prevDoor = attributes.Door;
     }
@@ -538,7 +565,7 @@ class ElegooCCDevice extends PrinterDevice {
     if (attributes.UsbDiskStatus !== undefined) {
       if (this._prevUsb !== null && this._prevUsb !== attributes.UsbDiskStatus) {
         const state = attributes.UsbDiskStatus === 1 ? 'inserted' : 'removed';
-        this.homey.flow.getTriggerCard('usb_status_changed').trigger(this, { state }).catch(this.error);
+        if (this.triggerUsbStatusChanged) this.triggerUsbStatusChanged.trigger(this, { state }).catch(this.error);
       }
       this._prevUsb = attributes.UsbDiskStatus;
     }
@@ -546,40 +573,42 @@ class ElegooCCDevice extends PrinterDevice {
     // --- Threshold Triggers ---
     const progress = pi ? pi.Progress : attributes.PrintProgress;
     if (progress !== undefined && progress > 0) {
-      this.homey.flow
-        .getTriggerCard('progress_reached')
-        .getArgumentValues()
-        .then((argsList) => {
-          for (const args of argsList) {
-            if (progress >= args.percentage && !this._firedProgress.has(args.percentage)) {
-              this.homey.flow.getTriggerCard('progress_reached').trigger(this, {}, args).catch(this.error);
-              this._firedProgress.add(args.percentage);
+      if (this.triggerProgressReached) {
+        this.triggerProgressReached
+          .getArgumentValues()
+          .then((argsList) => {
+            for (const args of argsList) {
+              if (progress >= args.percentage && !this._firedProgress.has(args.percentage)) {
+                this.triggerProgressReached.trigger(this, {}, args).catch(this.error);
+                this._firedProgress.add(args.percentage);
+              }
             }
-          }
-        })
-        .catch(() => {});
+          })
+          .catch(() => {});
+      }
     }
 
     const layer = pi ? pi.CurrentLayer : attributes.CurrentLayer;
     if (layer !== undefined && layer > 0) {
-      this.homey.flow
-        .getTriggerCard('layer_reached')
-        .getArgumentValues()
-        .then((argsList) => {
-          for (const args of argsList) {
-            if (layer >= args.layer && !this._firedLayers.has(args.layer)) {
-              this.homey.flow.getTriggerCard('layer_reached').trigger(this, {}, args).catch(this.error);
-              this._firedLayers.add(args.layer);
+      if (this.triggerLayerReached) {
+        this.triggerLayerReached
+          .getArgumentValues()
+          .then((argsList) => {
+            for (const args of argsList) {
+              if (layer >= args.layer && !this._firedLayers.has(args.layer)) {
+                this.triggerLayerReached.trigger(this, {}, args).catch(this.error);
+                this._firedLayers.add(args.layer);
+              }
             }
-          }
-        })
-        .catch(() => {});
+          })
+          .catch(() => {});
+      }
     }
 
     // --- Temperature Reached Triggers ---
     if (nozzleTemp !== undefined && nozzleTarget !== undefined && nozzleTarget > 0) {
       if (!this._reachedNozzle && nozzleTemp >= nozzleTarget - 1) {
-        this.homey.flow.getTriggerCard('nozzle_temp_reached').trigger(this).catch(this.error);
+        if (this.triggerNozzleTempReached) this.triggerNozzleTempReached.trigger(this).catch(this.error);
         this._reachedNozzle = true;
       } else if (nozzleTemp < nozzleTarget - 5) {
         this._reachedNozzle = false;
@@ -588,7 +617,7 @@ class ElegooCCDevice extends PrinterDevice {
 
     if (bedTemp !== undefined && bedTarget !== undefined && bedTarget > 0) {
       if (!this._reachedBed && bedTemp >= bedTarget - 1) {
-        this.homey.flow.getTriggerCard('bed_temp_reached').trigger(this).catch(this.error);
+        if (this.triggerBedTempReached) this.triggerBedTempReached.trigger(this).catch(this.error);
         this._reachedBed = true;
       } else if (bedTemp < bedTarget - 5) {
         this._reachedBed = false;
@@ -596,24 +625,26 @@ class ElegooCCDevice extends PrinterDevice {
     }
 
     if (chamberTemp !== undefined) {
-      this.homey.flow
-        .getTriggerCard('chamber_temp_reached')
-        .getArgumentValues()
-        .then((argsList) => {
-          for (const args of argsList) {
-            if (chamberTemp >= args.temperature && !this._firedChamber.has(args.temperature)) {
-              this.homey.flow.getTriggerCard('chamber_temp_reached').trigger(this, {}, args).catch(this.error);
-              this._firedChamber.add(args.temperature);
-            } else if (chamberTemp < args.temperature - 2) {
-              this._firedChamber.delete(args.temperature);
+      if (this.triggerChamberTempReached) {
+        this.triggerChamberTempReached
+          .getArgumentValues()
+          .then((argsList) => {
+            for (const args of argsList) {
+              if (chamberTemp >= args.temperature && !this._firedChamber.has(args.temperature)) {
+                this.triggerChamberTempReached.trigger(this, {}, args).catch(this.error);
+                this._firedChamber.add(args.temperature);
+              } else if (chamberTemp < args.temperature - 2) {
+                this._firedChamber.delete(args.temperature);
+              }
             }
-          }
-        })
-        .catch(() => {});
+          })
+          .catch(() => {});
+      }
     }
 
     // --- Final Step: Triggers ---
     if (this._pendingStatusChange) {
+      // Ensure we don't trigger status changes too rapidly during startup
       this.handleStatusTriggers(this._pendingStatusChange.newStatus, this._pendingStatusChange.oldStatus);
       this._pendingStatusChange = null;
     }
@@ -638,26 +669,24 @@ class ElegooCCDevice extends PrinterDevice {
     try {
       // 1. Specific State Triggers
       if (sLower === 'printing' && oldLower !== 'printing') {
-        if (oldLower === 'paused') {
-          this.homey.flow.getTriggerCard('print_resumed').trigger(this).catch(this.error);
-        } else {
-          this.homey.flow.getTriggerCard('print_started').trigger(this).catch(this.error);
-        }
+        const trigger = oldLower === 'paused' ? this.triggerPrintResumed : this.triggerPrintStarted;
+        if (trigger) trigger.trigger(this).catch(this.error);
       } else if (sLower === 'finished' && oldLower !== 'finished') {
-        this.homey.flow.getTriggerCard('print_finished').trigger(this).catch(this.error);
+        if (this.triggerPrintFinished) this.triggerPrintFinished.trigger(this).catch(this.error);
       } else if (sLower === 'paused' && oldLower !== 'paused') {
-        this.homey.flow.getTriggerCard('print_paused').trigger(this).catch(this.error);
+        if (this.triggerPrintPaused) this.triggerPrintPaused.trigger(this).catch(this.error);
       } else if (sLower === 'error' && oldLower !== 'error') {
-        this.homey.flow
-          .getTriggerCard('error_detected')
-          .trigger(this, { error_msg: 'Printer reported error state' })
-          .catch(this.error);
+        if (this.triggerErrorDetected) {
+          this.triggerErrorDetected.trigger(this, { error_msg: 'Printer reported error state' }).catch(this.error);
+        }
       } else if (sLower === 'idle' && (oldLower === 'printing' || oldLower === 'paused')) {
-        this.homey.flow.getTriggerCard('print_cancelled').trigger(this).catch(this.error);
+        if (this.triggerPrintCancelled) this.triggerPrintCancelled.trigger(this).catch(this.error);
       }
 
       // 2. Generic Status Change Trigger
-      this.homey.flow.getTriggerCard('status_changed').trigger(this, { status: newStatus }).catch(this.error);
+      if (this.triggerStatusChanged) {
+        this.triggerStatusChanged.trigger(this, { status: newStatus }).catch(this.error);
+      }
 
       // Clean up threshold trackers on end of print
       if (sLower === 'finished' || sLower === 'idle' || sLower === 'error') {
