@@ -1,10 +1,10 @@
 {
   "id": "com.elegoo.sdcp",
   "name": {
-    "en": "Elegoo SDCP Printers",
-    "nl": "Elegoo SDCP Printers",
-    "de": "Elegoo SDCP Drucker",
-    "no": "Elegoo SDCP Skrivere"
+    "en": "Elegoo 3D Printers",
+    "nl": "Elegoo 3D Printers",
+    "de": "Elegoo 3D Drucker",
+    "no": "Elegoo 3D Skrivere"
   },
   "description": {
     "en": "Integrating Elegoo 3D Printers effortlessly into your smart home via the local SDCP protocol.",
@@ -39,10 +39,11 @@
     "no": ["elegoo", "3d-skriver", "smart-skriver"]
   },
   "permissions": [],
-  "brandColor": "#00E5FF",
+  "brandColor": "#4381FF",
   "images": {
-    "large": "/assets/images/large.png",
-    "small": "/assets/images/small.png"
+    "xlarge": "/assets/images/xlarge.jpg",
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
   },
   "drivers": [
     {
@@ -451,10 +452,39 @@
           }
         }
       ],
+      "repair": true,
       "images": {
-        "large": "/drivers/elegoo_cc/assets/images/large.png",
-        "small": "/drivers/elegoo_cc/assets/images/small.png"
-      }
+        "xlarge": "/drivers/elegoo_cc/assets/images/xlarge.jpg",
+        "large": "/drivers/elegoo_cc/assets/images/large.jpg",
+        "small": "/drivers/elegoo_cc/assets/images/small.jpg"
+      },
+      "settings": [
+        {
+          "id": "address",
+          "type": "text",
+          "label": {
+            "en": "IP Address",
+            "nl": "IP-adres",
+            "de": "IP-Adresse",
+            "no": "IP-adresse"
+          },
+          "placeholder": "192.168.1.100"
+        },
+        {
+          "id": "mainboard_id",
+          "type": "text",
+          "label": {
+            "en": "Mainboard ID",
+            "nl": "Moederbord-ID",
+            "de": "Mainboard-ID",
+            "no": "Hovedkort-ID"
+          },
+          "hint": {
+            "en": "Unique identifier for this printer. Automatically discovered.",
+            "no": "Unik identifikator for denne skriveren. Oppdages automatisk."
+          }
+        }
+      ]
     }
   ],
   "capabilities": {

@@ -1,241 +1,289 @@
 <!doctype html>
 <html>
-  <head>
-    <script type="text/javascript" src="/homey/generic/pair.js"></script>
-    <style>
-      body {
-        font-family: sans-serif;
-        padding: 10px;
-      }
-      .device-list {
-        list-style: none;
-        padding: 0;
-      }
-      .device-item {
-        display: flex;
-        align-items: center;
-        padding: 10px 15px;
-        margin-bottom: 8px;
-        background: #f8f8f8;
-        border: 1px solid #eee;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-      .device-item:hover {
-        background: #f0f0f0;
-      }
-      .device-info {
-        flex: 1;
-      }
-      .device-name {
-        font-weight: bold;
-        font-size: 14px;
-        margin-bottom: 2px;
-      }
-      .device-address {
-        font-size: 11px;
-        color: #777;
-      }
-      .loading {
-        text-align: center;
-        padding: 15px;
-        font-size: 13px;
-        color: #888;
-      }
-      .manual-toggle {
-        display: block;
-        margin-top: 15px;
-        font-size: 13px;
-        color: #00e5ff;
-        text-decoration: none;
-        text-align: center;
-      }
-      .manual-form {
-        display: none;
-        padding: 15px;
-        border-top: 1px solid #ddd;
-        margin-top: 20px;
-      }
-      .form-group {
-        margin-bottom: 15px;
-      }
-      .form-group label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-      .form-group input {
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      .error {
-        color: red;
-        display: none;
-        margin-top: 10px;
-        text-align: center;
-      }
-      .button {
-        width: 100%;
-        padding: 10px;
-        background: #00e5ff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .button:disabled {
-        background: #ccc;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="searching" class="loading" data-i18n="pair.searching">Searching for Elegoo printers...</div>
 
-    <ul id="device-list" class="device-list"></ul>
+<head>
+  <script type="text/javascript" src="/homey/generic/pair.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 10px;
+    }
 
-    <div id="no-devices" class="loading" style="display: none" data-i18n="pair.no_devices">
-      No printers found automatically.
+    .device-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .device-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      margin-bottom: 8px;
+      background: #f8f8f8;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .device-item:hover {
+      background: #f0f0f0;
+    }
+
+    .device-info {
+      flex: 1;
+    }
+
+    .device-name {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .device-status {
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .status-repair {
+      color: #ff9800;
+      font-weight: bold;
+    }
+
+    .status-added {
+      color: #4caf50;
+    }
+
+    .status-ready {
+      color: #888;
+    }
+
+    .device-item.repairable {
+      border-color: #ff9800;
+      background: #fffcf5;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .manual-toggle {
+      display: block;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #00e5ff;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .manual-form {
+      display: none;
+      padding: 15px;
+      border-top: 1px solid #ddd;
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .error {
+      color: red;
+      display: none;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .button {
+      width: 100%;
+      padding: 10px;
+      background: #00e5ff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .button:disabled {
+      background: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="searching" class="loading" data-i18n="pair.searching">Searching for Elegoo printers...</div>
+
+  <ul id="device-list" class="device-list"></ul>
+
+  <div id="no-devices" class="loading" style="display: none" data-i18n="pair.no_devices">
+    No printers found automatically.
+  </div>
+
+  <a href="#" id="toggle-manual" class="manual-toggle" data-i18n="pair.add_manual">Add Manually (IP)</a>
+
+  <div id="manual-form" class="manual-form">
+    <div class="form-group">
+      <label for="ip" data-i18n="pair.ip_address">IP Address</label>
+      <input type="text" id="ip" placeholder="192.168.1.100" />
     </div>
-
-    <a href="#" id="toggle-manual" class="manual-toggle" data-i18n="pair.add_manual">Add Manually (IP)</a>
-
-    <div id="manual-form" class="manual-form">
-      <div class="form-group">
-        <label for="ip" data-i18n="pair.ip_address">IP Address</label>
-        <input type="text" id="ip" placeholder="192.168.1.100" />
-      </div>
-      <div class="form-group">
-        <label for="port" data-i18n="pair.port">Port</label>
-        <input type="number" id="port" value="3000" />
-      </div>
-      <button id="add-manual" class="button" data-i18n="pair.add_printer_btn">Add Printer</button>
+    <div class="form-group">
+      <label for="port" data-i18n="pair.port">Port</label>
+      <input type="number" id="port" value="3000" />
     </div>
+    <button id="add-manual" class="button" data-i18n="pair.add_printer_btn">Add Printer</button>
+  </div>
 
-    <div id="error" class="error"></div>
+  <div id="error" class="error"></div>
 
-    <script type="text/javascript">
-      const searching = document.getElementById('searching');
-      const list = document.getElementById('device-list');
-      const noDevices = document.getElementById('no-devices');
-      const toggleManual = document.getElementById('toggle-manual');
-      const manualForm = document.getElementById('manual-form');
-      const ipInput = document.getElementById('ip');
-      const portInput = document.getElementById('port');
-      const addManualBtn = document.getElementById('add-manual');
-      const errorDiv = document.getElementById('error');
+  <script type="text/javascript">
+    const searching = document.getElementById('searching');
+    const list = document.getElementById('device-list');
+    const noDevices = document.getElementById('no-devices');
+    const toggleManual = document.getElementById('toggle-manual');
+    const manualForm = document.getElementById('manual-form');
+    const ipInput = document.getElementById('ip');
+    const portInput = document.getElementById('port');
+    const addManualBtn = document.getElementById('add-manual');
+    const errorDiv = document.getElementById('error');
 
-      // Start discovery
-      function discover() {
-        searching.innerText = Homey.__('pair.searching');
-        searching.style.display = 'block';
-        list.innerHTML = '';
-        noDevices.style.display = 'none';
+    // Start discovery
+    function discover() {
+      searching.innerText = Homey.__('pair.searching') || 'Searching...';
+      searching.style.display = 'block';
+      list.innerHTML = '';
+      noDevices.style.display = 'none';
 
-        Homey.emit('discover', null, (err, devices) => {
-          searching.style.display = 'none';
-          if (err) {
-            errorDiv.innerText = err.message || err;
-            errorDiv.style.display = 'block';
-            return;
+      Homey.emit('discover', null, (err, devices) => {
+        searching.style.display = 'none';
+        if (err) {
+          errorDiv.innerText = err.message || err;
+          errorDiv.style.display = 'block';
+          return;
+        }
+
+        if (!devices || devices.length === 0) {
+          noDevices.style.display = 'block';
+          return;
+        }
+
+        devices.forEach((device) => {
+          const li = document.createElement('li');
+          li.className = 'device-item' + (device.repairRequired ? ' repairable' : '');
+          
+          let statusHtml = '';
+          if (device.repairRequired) {
+            statusHtml = `<div class="device-status status-repair">IP changed - Click to repair</div>`;
+          } else if (device.isDuplicate) {
+            statusHtml = `<div class="device-status status-added">Already connected</div>`;
+          } else {
+            statusHtml = `<div class="device-status status-ready">Ready to add</div>`;
           }
 
-          if (!devices || devices.length === 0) {
-            noDevices.style.display = 'block';
-            return;
-          }
-
-          devices.forEach((device) => {
-            const li = document.createElement('li');
-            li.className = 'device-item';
-            li.innerHTML = `
-              <div style="margin-right: 12px; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #00e5ff; border-radius: 50%;">
-                <svg viewBox="0 0 200 200" width="24" height="24" style="filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.1));" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Outer cube / Enclosure -->
-                  <rect x="30" y="30" width="140" height="140" rx="12" fill="none" stroke="white" stroke-width="14"/>
-                  <!-- Internal window/opening -->
-                  <rect x="50" y="50" width="100" height="75" rx="6" fill="none" stroke="white" stroke-width="10"/>
-                  <!-- Extruder Gantry -->
-                  <line x1="50" y1="65" x2="150" y2="65" stroke="white" stroke-width="8"/>
-                  <rect x="85" y="55" width="30" height="25" rx="4" fill="none" stroke="white" stroke-width="8"/>
-                  <path d="M93 80 L107 80 L100 92 Z" fill="white"/>
-                  <!-- Core bed plate -->
-                  <line x1="60" y1="115" x2="140" y2="115" stroke="white" stroke-width="10" stroke-linecap="round"/>
-                  <!-- Printed part -->
-                  <path d="M85 110 L100 85 L115 110 Z" fill="none" stroke="white" stroke-width="8" stroke-linejoin="round"/>
-                  <!-- Lower control panel screen -->
-                  <rect x="80" y="145" width="40" height="12" rx="4" fill="white"/>
-                </svg>
+          li.innerHTML = `
+              <div style="margin-right: 12px; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: ${device.repairRequired ? '#ff9800' : '#00e5ff'}; border-radius: 50%;">
+                <img src="../assets/icon.png" width="24" height="24" style="filter: brightness(0) invert(1) drop-shadow(0px 1px 2px rgba(0,0,0,0.1));" />
               </div>
               <div class="device-info">
                 <div class="device-name">${device.name}</div>
-                <div class="device-address">${device.data.id}</div>
+                <div class="device-address">${device.settings.address}</div>
+                ${statusHtml}
               </div>
             `;
-            li.addEventListener('click', () => {
-              addDevice(device);
-            });
-            list.appendChild(li);
+          li.addEventListener('click', () => {
+            addDevice(device);
           });
+          list.appendChild(li);
         });
-      }
+      });
+    }
 
-      function addDevice(device) {
-        errorDiv.style.display = 'none';
-        searching.style.display = 'block';
-        searching.innerText = Homey.__('pair.adding');
+    function addDevice(device) {
+      errorDiv.style.display = 'none';
+      searching.style.display = 'block';
+      searching.innerText = Homey.__('pair.adding');
 
-        // Homey.createDevice finalizes the pairing and adds it to the Homey devices list
-        Homey.createDevice(device, (err) => {
+      // If it's a duplicate, we ask the driver to repair it only upon click
+      if (device.isDuplicate) {
+        console.log('Sending repair request for existing device');
+        Homey.emit('repair_existing', device, (err) => {
           searching.style.display = 'none';
           if (err) {
             errorDiv.innerText = err.message || err;
             errorDiv.style.display = 'block';
             return;
           }
-
-          // Close the pairing window on success
+          // Successfully repaired
           Homey.done();
         });
+        return;
       }
 
-      toggleManual.addEventListener('click', (e) => {
-        e.preventDefault();
-        manualForm.style.display = manualForm.style.display === 'none' ? 'block' : 'none';
+      // Homey.createDevice finalizes the pairing and adds it to the Homey devices list
+      Homey.createDevice(device, (err) => {
+        searching.style.display = 'none';
+        if (err) {
+          errorDiv.innerText = err.message || err;
+          errorDiv.style.display = 'block';
+          return;
+        }
+
+        // Close the pairing window on success
+        Homey.done();
       });
+    }
 
-      addManualBtn.addEventListener('click', () => {
-        const ip = ipInput.value.trim();
-        const port = parseInt(portInput.value, 10);
+    toggleManual.addEventListener('click', (e) => {
+      e.preventDefault();
+      manualForm.style.display = manualForm.style.display === 'none' ? 'block' : 'none';
+    });
 
-        if (!ip) return;
+    addManualBtn.addEventListener('click', () => {
+      const ip = ipInput.value.trim();
+      const port = parseInt(portInput.value, 10);
 
-        addManualBtn.disabled = true;
-        errorDiv.style.display = 'none';
+      if (!ip) return;
 
-        Homey.emit('validate_manual', { ip, port }, (err, device) => {
-          addManualBtn.disabled = false;
-          if (err) {
-            errorDiv.innerText = err.message || err;
-            errorDiv.style.display = 'block';
-            return;
-          }
+      addManualBtn.disabled = true;
+      errorDiv.style.display = 'none';
 
-          if (device) {
-            addDevice(device);
-          } else {
-            errorDiv.innerText = Homey.__('pair.not_found');
-            errorDiv.style.display = 'block';
-          }
-        });
+      Homey.emit('validate_manual', { ip, port }, (err, device) => {
+        addManualBtn.disabled = false;
+        if (err) {
+          errorDiv.innerText = err.message || err;
+          errorDiv.style.display = 'block';
+          return;
+        }
+
+        if (device) {
+          addDevice(device);
+        } else {
+          errorDiv.innerText = Homey.__('pair.not_found');
+          errorDiv.style.display = 'block';
+        }
       });
+    });
 
-      // Start discovery on load
-      discover();
-    </script>
-  </body>
+    // Start discovery on load
+    discover();
+  </script>
+</body>
+
 </html>

@@ -648,6 +648,13 @@ class ElegooCCDevice extends PrinterDevice {
       this.handleStatusTriggers(this._pendingStatusChange.newStatus, this._pendingStatusChange.oldStatus);
       this._pendingStatusChange = null;
     }
+
+    // --- Migration/Correlation Data ---
+    const mid = attributes.MainboardID || attributes.MainboardId || attributes.Id;
+    if (mid && !this.getSetting('mainboard_id')) {
+      this.log(`Migrating/Capturing MainboardID: ${mid}`);
+      this.setSettings({ mainboard_id: mid }).catch(this.error);
+    }
   }
 
   handleThumbnail(base64Data) {
