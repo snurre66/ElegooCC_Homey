@@ -13,5 +13,8 @@
   },
   "1.1.2": {
     "en": "Refactored codebase for improved maintainability. Added Homey Insights logging for all sensors. Improved SDK v3 compliance. Fixed camera snapshot reliability. Migrated to HomeyCompose."
+  },
+  "1.1.3": {
+    "en": "Fixed app icon visibility on brand color background."
   }
 }
