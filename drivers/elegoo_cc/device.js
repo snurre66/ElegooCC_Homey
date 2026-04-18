@@ -95,10 +95,22 @@ class ElegooCCDevice extends PrinterDevice {
           .catch((e) => this.error('Camera: initial update() FAILED:', e.message));
       }, 3000);
 
-      // Refresh every 10 seconds
+      // Refresh every 5 seconds (better for Web UI fallback)
       this._cameraInterval = this.homey.setInterval(() => {
         this.snapshotImage.update().catch(() => {});
-      }, 10000);
+      }, 5000);
+
+      // Live Video Stream
+      this.liveVideo = await this.homey.videos.createVideoOther();
+      this.liveVideo.registerVideoUrlListener(async () => {
+        const url = `http://${this.host}:3031/video`;
+        this.log(`Camera: live stream URL requested, returning ${url}`);
+        return url;
+      });
+
+      await this.setCameraVideo('elegoo_live', 'Live Stream', this.liveVideo)
+        .then(() => this.log('Camera: Live Stream registered OK'))
+        .catch((e) => this.error('Camera: setCameraVideo FAILED:', e.message));
     } catch (err) {
       this.error('Critical: Failed to register snapshot camera:', err.message);
     }
@@ -168,19 +180,19 @@ class ElegooCCDevice extends PrinterDevice {
     // Buttons
     this.registerCapabilityListener('button.pause', async () => {
       this.log('UI: Pause Program');
-      return this.client.sendCommand(129, {});
+      return this.client.sendCommand(SDCP_CMD.PAUSE_PRINT, {});
     });
     this.registerCapabilityListener('button.resume', async () => {
       this.log('UI: Resume Program');
-      return this.client.sendCommand(131, {});
+      return this.client.sendCommand(SDCP_CMD.RESUME_PRINT, {});
     });
     this.registerCapabilityListener('button.stop', async () => {
       this.log('UI: Stop/Cancel Program');
-      return this.client.sendCommand(130, {});
+      return this.client.sendCommand(SDCP_CMD.STOP_PRINT, {});
     });
     this.registerCapabilityListener('button.home', async () => {
       this.log('UI: Home All Axes');
-      return this.client.sendCommand(402, { Axis: 'XYZ' });
+      return this.client.sendCommand(SDCP_CMD.CC_HOME_ALL, { Axis: 'XYZ' });
     });
 
     // Read-only temperature targets
@@ -200,21 +212,21 @@ class ElegooCCDevice extends PrinterDevice {
     // Fans & Lights
     this.registerCapabilityListener('part_fan_speed', async (value) => {
       this.log(`UI: Set Part Fan Speed -> ${value}%`);
-      return this.client.sendCommand(403, { TargetFanSpeed: { ModelFan: value } });
+      return this.client.sendCommand(SDCP_CMD.CC_SET_CONFIG, { TargetFanSpeed: { ModelFan: value } });
     });
     this.registerCapabilityListener('onoff.chamberlight', async (value) => {
       this.log(`UI: Set Chamber Light -> ${value ? 'ON' : 'OFF'}`);
-      return this.client.sendCommand(403, { LightStatus: { SecondLight: value ? 1 : 0 } });
+      return this.client.sendCommand(SDCP_CMD.CC_SET_CONFIG, { LightStatus: { SecondLight: value ? 1 : 0 } });
     });
     this.registerCapabilityListener('onoff.auxfan', async (value) => {
-      return this.client.sendCommand(403, { TargetFanSpeed: { AuxiliaryFan: value ? 100 : 0 } });
+      return this.client.sendCommand(SDCP_CMD.CC_SET_CONFIG, { TargetFanSpeed: { AuxiliaryFan: value ? 100 : 0 } });
     });
     this.registerCapabilityListener('onoff.exhaustfan', async (value) => {
-      return this.client.sendCommand(403, { TargetFanSpeed: { BoxFan: value ? 100 : 0 } });
+      return this.client.sendCommand(SDCP_CMD.CC_SET_CONFIG, { TargetFanSpeed: { BoxFan: value ? 100 : 0 } });
     });
     this.registerCapabilityListener('onoff.boxfan', async (value) => {
       this.log(`UI: Set Box Fan -> ${value ? 'ON' : 'OFF'}`);
-      return this.client.sendCommand(403, { TargetFanSpeed: { BoxFan: value ? 100 : 0 } });
+      return this.client.sendCommand(SDCP_CMD.CC_SET_CONFIG, { TargetFanSpeed: { BoxFan: value ? 100 : 0 } });
     });
   }
 
@@ -224,15 +236,15 @@ class ElegooCCDevice extends PrinterDevice {
     const flow = this.homey.flow;
     flow.getActionCard('emergency_stop').registerRunListener(async () => {
       this.log('Action: Emergency Stop');
-      return this.client.sendCommand(130, {});
+      return this.client.sendCommand(SDCP_CMD.STOP_PRINT, {});
     });
     flow.getActionCard('pause_print').registerRunListener(async () => {
       this.log('Action: Pause Print');
-      return this.client.sendCommand(129, {});
+      return this.client.sendCommand(SDCP_CMD.PAUSE_PRINT, {});
     });
     flow.getActionCard('resume_print').registerRunListener(async () => {
       this.log('Action: Resume Print');
-      return this.client.sendCommand(131, {});
+      return this.client.sendCommand(SDCP_CMD.RESUME_PRINT, {});
     });
     flow.getActionCard('home_axes').registerRunListener(async (args) => {
       this.log(`Action: Home Axes (${args.axes})`);
@@ -274,44 +286,63 @@ class ElegooCCDevice extends PrinterDevice {
 
   // ── Capability Updates (delegated to CapabilityMapper) ────
 
-  updateCapabilities(attributes) {
-    if (!attributes) return;
+  /**
+   * Main entry point for SDCP data updates.
+   * Dispatches to CapabilityMapper for logic.
+   */
+  updateCapabilities(rawAttr) {
+    if (!rawAttr) return;
 
-    const temps = CapabilityMapper.updateTemperatures(this, attributes);
-    CapabilityMapper.updateFactors(this, attributes);
-    CapabilityMapper.updateFansAndLights(this, attributes);
-    CapabilityMapper.updateSafetySensors(this, attributes);
-    CapabilityMapper.updateHardwareInfo(this, attributes);
-    CapabilityMapper.updateIdleTelemetry(this, attributes);
+    // Normalize data: Flatten nested structures into a unified object.
+    // Order of precedence: Root > Data > Status > Attributes
+    const attr = {
+      ...(typeof rawAttr.Attributes === 'object' ? rawAttr.Attributes : {}),
+      ...(typeof rawAttr.Status === 'object' && !Array.isArray(rawAttr.Status) ? rawAttr.Status : {}),
+      ...(typeof rawAttr.Data === 'object' ? rawAttr.Data : {}),
+      ...(typeof rawAttr === 'object' ? rawAttr : {}),
+    };
 
-    const oldStatus = this.getCapabilityValue('printer_status');
-    const newStatus = CapabilityMapper.updateStatus(this, attributes);
-    const { progress, layer } = CapabilityMapper.updatePrintInfo(this, attributes);
-    CapabilityMapper.updateAdvancedInfo(this, attributes);
-
-    // Thumbnail
-    if (attributes.Thumbnail && attributes.Thumbnail.length > 50) {
-      this._handleThumbnail(attributes.Thumbnail);
+    // Flatten one more level for Data.Status if it exists as an object
+    if (rawAttr.Data && typeof rawAttr.Data.Status === 'object' && !Array.isArray(rawAttr.Data.Status)) {
+      Object.assign(attr, rawAttr.Data.Status);
     }
 
-    // Sensor transition triggers
-    CapabilityMapper.processSensorTransitions(this, attributes);
+    // VERBOSE LOGGING for deep-dive diagnostics
+    const sRaw = attr.Status || attr.CurrentStatus;
+    this.log(`[SDCP Data] Status: ${JSON.stringify(sRaw)}, PrintStatus: ${attr.PrintInfo?.Status}`);
 
-    // Threshold triggers
+    // Check for status changes (prioritized logic)
+    const oldStatus = this.getCapabilityValue('printer_status');
+    const newStatus = CapabilityMapper.updateStatus(this, attr);
+    if (newStatus && newStatus !== oldStatus) {
+      CapabilityMapper.handleStatusTriggers(this, newStatus, oldStatus);
+    }
+
+    // Map remaining telemetry
+    CapabilityMapper.updateTemperatures(this, attr);
+    CapabilityMapper.updateFansAndLights(this, attr);
+    CapabilityMapper.updateFactors(this, attr);
+    CapabilityMapper.updateSafetySensors(this, attr);
+    CapabilityMapper.updateHardwareInfo(this, attr);
+    CapabilityMapper.updateIdleTelemetry(this, attr);
+    CapabilityMapper.updateAdvancedInfo(this, attr);
+    CapabilityMapper.processSensorTransitions(this, attr);
+
+    // Thumbnail
+    if (attr.Thumbnail && attr.Thumbnail.length > 50) {
+      this._handleThumbnail(attr.Thumbnail);
+    }
+
+    const { progress, layer } = CapabilityMapper.updatePrintInfo(this, attr);
     CapabilityMapper.processThresholdTriggers(this, {
       progress,
       layer,
-      nozzleTemp: temps.nozzleTemp,
-      bedTemp: temps.bedTemp,
-      chamberTemp: temps.chamberTemp,
-      nozzleTarget: temps.nozzleTarget,
-      bedTarget: temps.bedTarget,
+      nozzleTemp: attr.TempOfNozzle ?? attr.ExtruderTemp,
+      bedTemp: attr.TempOfHotbed ?? attr.BedTemp,
+      chamberTemp: attr.TempOfBox ?? attr.TempOfAmbient ?? attr.ChamberTemp,
+      nozzleTarget: attr.TempTargetNozzle ?? attr.TargetTempOfNozzle ?? attr.ExtruderTargetTemp,
+      bedTarget: attr.TempTargetHotbed ?? attr.TargetTempOfHotbed ?? attr.BedTargetTemp,
     });
-
-    // Status change triggers (fire last, after all capabilities are set)
-    if (newStatus) {
-      CapabilityMapper.handleStatusTriggers(this, newStatus, oldStatus || '');
-    }
   }
 
   _handleThumbnail(base64Data) {
