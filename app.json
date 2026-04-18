@@ -16,8 +16,8 @@
   "version": "1.1.1",
   "sdk": 3,
   "author": {
-    "name": "<HIDDEN>",
-    "email": "<HIDDEN>"
+    "name": "Thomas Veivåg",
+    "email": "thomas.veivag@gmail.com"
   },
   "support": "https://community.homey.app/",
   "source": "https://github.com/snurre66/elegoo-homey",
@@ -27,7 +27,7 @@
   "contributing": {
     "donate": {
       "paypal": {
-        "username": "<HIDDEN>"
+        "username": "thomasveivag"
       }
     }
   },
