@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "homey": {
+      "command": "npx",
+      "args": ["-y", "@iflow-mcp/andreassolberg-homey-mcp"],
+      "env": {
+        "HOMEY_URL": "http://<YOUR_HOMEY_IP_OR_LOCAL_URL>",
+        "HOMEY_TOKEN": "<YOUR_HOMEY_BEARER_TOKEN>"
+      }
+    }
+  }
+}
