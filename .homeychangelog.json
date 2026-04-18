@@ -16,5 +16,8 @@
   },
   "1.1.3": {
     "en": "Fixed app icon visibility on brand color background."
+  },
+  "1.1.4": {
+    "en": "Fixed capabilities to be within SDCP V3.0.0"
   }
 }
