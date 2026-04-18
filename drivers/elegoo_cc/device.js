@@ -1,7 +1,7 @@
 'use strict';
 
 const http = require('http');
-const { PassThrough } = require('stream');
+const { Duplex } = require('stream');
 const PrinterDevice = require('../../lib/PrinterDevice');
 const { SDCP_CMD } = require('../../lib/SDCPCommands');
 const CapabilityMapper = require('../../lib/CapabilityMapper');
@@ -62,19 +62,23 @@ class ElegooCCDevice extends PrinterDevice {
         this.log('Camera: setStream called, fetching snapshot...');
         try {
           const buffer = await this._fetchSnapshotBuffer();
-          const snapshot = new PassThrough();
+          const snapshot = new Duplex();
+          snapshot._read = () => {};
+
           if (buffer && buffer.length > 0) {
             this.log(`Camera: pushing frame of ${buffer.length} bytes`);
-            snapshot.end(buffer);
+            snapshot.push(buffer);
           } else {
             this.log('Camera: no frame, pushing empty stream');
-            snapshot.end();
           }
+
+          snapshot.push(null); // End of stream
           return snapshot.pipe(stream);
         } catch (error) {
           this.error('Camera mapping error:', error.message);
-          const snapshot = new PassThrough();
-          snapshot.end();
+          const snapshot = new Duplex();
+          snapshot._read = () => {};
+          snapshot.push(null);
           return snapshot.pipe(stream);
         }
       });
@@ -105,22 +109,22 @@ class ElegooCCDevice extends PrinterDevice {
       const url = `http://${this.host}:3031/video`;
       this.log(`Camera: connecting to ${url}`);
 
-      let req;
-      const timeout = this.homey.setTimeout(() => {
+      const timeout = setTimeout(() => {
         this.log('Camera: timeout waiting for MJPEG frame');
-        if (req) req.destroy();
+        req.destroy();
         resolve(null);
       }, 8000);
 
-      req = http.get(url, (res) => {
+      const req = http.get(url, (res) => {
         this.log(`Camera: HTTP ${res.statusCode} content-type: ${res.headers['content-type']}`);
         if (res.statusCode !== 200) {
-          this.homey.clearTimeout(timeout);
+          clearTimeout(timeout);
           res.resume();
           resolve(null);
           return;
         }
 
+        // Scan incoming chunks for JPEG SOI (0xFFD8) and EOI (0xFFD9) markers
         const chunks = [];
         let frameFound = false;
 
@@ -132,7 +136,7 @@ class ElegooCCDevice extends PrinterDevice {
           const end = buf.indexOf(Buffer.from([0xff, 0xd9]));
           if (start !== -1 && end !== -1 && end > start) {
             frameFound = true;
-            this.homey.clearTimeout(timeout);
+            clearTimeout(timeout);
             const frame = buf.slice(start, end + 2);
             this.log(`Camera: extracted JPEG frame ${frame.length} bytes`);
             req.destroy();
@@ -142,7 +146,7 @@ class ElegooCCDevice extends PrinterDevice {
 
         res.on('end', () => {
           if (!frameFound) {
-            this.homey.clearTimeout(timeout);
+            clearTimeout(timeout);
             this.log('Camera: stream ended without a complete frame');
             resolve(null);
           }
@@ -151,7 +155,7 @@ class ElegooCCDevice extends PrinterDevice {
 
       req.on('error', (err) => {
         if (err.code === 'ECONNRESET' || err.message.includes('socket hang up')) return;
-        this.homey.clearTimeout(timeout);
+        clearTimeout(timeout);
         this.error(`Camera: fetch error: ${err.message}`);
         resolve(null);
       });
