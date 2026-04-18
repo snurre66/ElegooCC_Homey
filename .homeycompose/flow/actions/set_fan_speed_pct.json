@@ -1,0 +1,61 @@
+{
+  "id": "set_fan_speed_pct",
+  "title": {
+    "en": "Set Fan Speed",
+    "nl": "Ventilatorsnelheid instellen",
+    "de": "Lüftergeschwindigkeit setzen",
+    "no": "Sett viftehastighet"
+  },
+  "titleFormatted": {
+    "en": "Set [[fan]] speed to [[percentage]]%",
+    "nl": "Zet [[fan]] snelheid op [[percentage]]%",
+    "de": "Setze [[fan]]-Geschwindigkeit auf [[percentage]]%",
+    "no": "Sett [[fan]]-hastighet til [[percentage]]%"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    },
+    {
+      "name": "fan",
+      "type": "dropdown",
+      "values": [
+        {
+          "id": "model",
+          "label": {
+            "en": "Part Cooling Fan",
+            "nl": "Objectkoeler",
+            "de": "Bauteillüfter",
+            "no": "Delkjølevifte"
+          }
+        },
+        {
+          "id": "aux",
+          "label": {
+            "en": "Auxiliary Fan",
+            "nl": "Extra ventilator",
+            "de": "Zusatzlüfter",
+            "no": "Ekstravifte"
+          }
+        },
+        {
+          "id": "exhaust",
+          "label": {
+            "en": "Exhaust Fan",
+            "nl": "Uitlaatventilator",
+            "de": "Abluftlüfter",
+            "no": "Eksosvifte"
+          }
+        }
+      ]
+    },
+    {
+      "name": "percentage",
+      "type": "number",
+      "min": 0,
+      "max": 100
+    }
+  ]
+}

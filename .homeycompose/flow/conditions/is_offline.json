@@ -1,0 +1,16 @@
+{
+  "id": "is_offline",
+  "title": {
+    "en": "Is Offline",
+    "nl": "Is offline",
+    "de": "Ist offline",
+    "no": "Er frakoblet"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

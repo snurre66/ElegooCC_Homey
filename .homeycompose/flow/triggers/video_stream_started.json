@@ -1,0 +1,16 @@
+{
+  "id": "video_stream_started",
+  "title": {
+    "en": "Someone started viewing camera stream",
+    "nl": "Iemand is begonnen met het bekijken van de camerastream",
+    "de": "Jemand hat angefangen, den Kamerastream anzusehen",
+    "no": "Noen begynte å se på kamerastrømmen"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "nozzle_temp_reached",
+  "title": {
+    "en": "Nozzle temperature reached",
+    "nl": "Nozzle-temperatuur bereikt",
+    "de": "Düsentemperatur erreicht",
+    "no": "Dysetemperatur nådd"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

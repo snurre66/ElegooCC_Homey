@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Remaining Memory",
+    "nl": "Resterend geheugen",
+    "de": "Verbleibender Speicher",
+    "no": "Gjenværende minne"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/memory.svg"
+}

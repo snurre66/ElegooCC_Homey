@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Extrusion Factor",
+    "nl": "Extrusiefactor",
+    "de": "Extrusionsfaktor",
+    "no": "Ekstruderingsfaktor"
+  },
+  "getable": true,
+  "setable": true,
+  "units": "%",
+  "min": 0,
+  "max": 200,
+  "step": 1
+}

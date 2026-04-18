@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Part Fan Speed",
+    "nl": "Ventilatorsnelheid objectkoeler",
+    "de": "Bauteillüftergeschwindigkeit",
+    "no": "Delkjøleviftehastighet"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "%",
+  "icon": "/assets/icons/part_fan_speed.svg"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Firmware Version",
+    "nl": "Firmwareversie",
+    "de": "Firmware-Version",
+    "no": "Fastvareversjon"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/icons/info.svg"
+}

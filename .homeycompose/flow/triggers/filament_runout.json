@@ -1,0 +1,16 @@
+{
+  "id": "filament_runout",
+  "title": {
+    "en": "Filament Runout",
+    "nl": "Filament op",
+    "de": "Filament leer",
+    "no": "Filament tomt"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

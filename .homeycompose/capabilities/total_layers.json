@@ -1,0 +1,12 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Total Layers",
+    "nl": "Totaal aantal lagen",
+    "de": "Gesamtschichten",
+    "no": "Totale lag"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/icons/layer_progress.svg"
+}

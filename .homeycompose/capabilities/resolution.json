@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Resolution",
+    "nl": "Resolutie",
+    "de": "Auflösung",
+    "no": "Oppløsning"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/icons/info.svg"
+}

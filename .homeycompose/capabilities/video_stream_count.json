@@ -1,0 +1,12 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Active Video Streams",
+    "no": "Aktive videostrømmer",
+    "nl": "Actieve videostreams",
+    "de": "Aktive Videostreams"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor"
+}

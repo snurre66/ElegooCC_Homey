@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Printer Status",
+    "nl": "Printerstatus",
+    "de": "Druckerstatus",
+    "no": "Skriverstatus"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/printer_status.svg"
+}

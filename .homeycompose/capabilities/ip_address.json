@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Printer IP",
+    "nl": "Printer-IP",
+    "de": "Drucker-IP",
+    "no": "Skriver-IP"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/icons/info.svg"
+}

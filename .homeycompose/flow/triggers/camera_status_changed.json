@@ -1,0 +1,42 @@
+{
+  "id": "camera_status_changed",
+  "title": {
+    "en": "Camera Status Changed",
+    "nl": "Camerastatus gewijzigd",
+    "de": "Kamerastatus geändert",
+    "no": "Kamerastatus endret"
+  },
+  "titleFormatted": {
+    "en": "Camera becomes [[state]]",
+    "nl": "Camera wordt [[state]]",
+    "de": "Kamera wird [[state]]",
+    "no": "Kamera blir [[state]]"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    },
+    {
+      "name": "state",
+      "type": "dropdown",
+      "values": [
+        {
+          "id": "enabled",
+          "label": {
+            "en": "Enabled",
+            "no": "Aktivert"
+          }
+        },
+        {
+          "id": "disabled",
+          "label": {
+            "en": "Disabled",
+            "no": "Deaktivert"
+          }
+        }
+      ]
+    }
+  ]
+}

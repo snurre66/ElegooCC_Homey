@@ -1,0 +1,12 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Motors Engaged",
+    "no": "Motorer aktivert",
+    "nl": "Motoren ingeschakeld",
+    "de": "Motoren eingeschaltet"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor"
+}

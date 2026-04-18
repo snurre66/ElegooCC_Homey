@@ -1,0 +1,16 @@
+{
+  "id": "is_light_on",
+  "title": {
+    "en": "Chamber Light is On",
+    "nl": "Kamerverlichting is aan",
+    "de": "Kammerbeleuchtung ist ein",
+    "no": "Kammerlys er på"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

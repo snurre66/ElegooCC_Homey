@@ -1,0 +1,16 @@
+{
+  "id": "is_paused",
+  "title": {
+    "en": "Is Paused",
+    "nl": "Gepauzeerd",
+    "de": "Pausiert",
+    "no": "Satt på pause"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

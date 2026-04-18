@@ -1,0 +1,16 @@
+{
+  "id": "print_resumed",
+  "title": {
+    "en": "Print Resumed",
+    "nl": "Print hervat",
+    "de": "Druck fortgesetzt",
+    "no": "Utskrift gjenopptatt"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

@@ -1,9 +1,58 @@
+'use strict';
+
 const Homey = require('homey');
 const Discovery = require('../../lib/Discovery');
 
 class ElegooCCDriver extends Homey.Driver {
   async onInit() {
     this.log('Elegoo CC Driver initialized');
+  }
+
+  /**
+   * Correlate a discovered printer with existing Homey devices.
+   * Returns a device descriptor with status metadata.
+   */
+  _correlateWithExisting(printer, existingDevices) {
+    let name = printer.name || 'Elegoo Printer';
+    const mid = printer.mainboardID;
+
+    const existingDevice = existingDevices.find((d) => {
+      const settings = d.getSettings();
+      return (mid && settings.mainboard_id === mid) || d.getData().id === printer.address;
+    });
+
+    let dataId = mid || printer.address;
+    let isDuplicate = false;
+    let status = 'ready';
+    let repairRequired = false;
+
+    if (existingDevice) {
+      this.log(`Correlated printer with existing device: ${existingDevice.getName()}`);
+      dataId = existingDevice.getData().id;
+      isDuplicate = true;
+      name = existingDevice.getName();
+
+      const oldAddress = existingDevice.getSetting('address');
+      if (oldAddress !== printer.address) {
+        status = 'ip_changed';
+        repairRequired = true;
+      } else {
+        status = 'already_added';
+      }
+    }
+
+    return {
+      name,
+      data: { id: dataId },
+      isDuplicate,
+      status,
+      repairRequired,
+      settings: {
+        address: printer.address,
+        model: printer.model,
+        mainboard_id: mid,
+      },
+    };
   }
 
   /**
@@ -21,55 +70,17 @@ class ElegooCCDriver extends Homey.Driver {
         const pairedPrinters = [];
 
         for (const printer of discoveredPrinters) {
-          let name = printer.name || 'Elegoo Printer';
-          const mid = printer.mainboardID;
+          const device = this._correlateWithExisting(printer, existingDevices);
 
-          // Check if this printer is already added (correlate via MainboardID or existing ID)
-          const existingDevice = existingDevices.find((d) => {
-            const settings = d.getSettings();
-            return (mid && settings.mainboard_id === mid) || d.getData().id === printer.address;
-          });
-
-          let dataId = mid || printer.address;
-          let isDuplicate = false;
-          let status = 'ready';
-          let repairRequired = false;
-
-          if (existingDevice) {
-            this.log(`Correlated discovered printer with existing device: ${existingDevice.getName()}`);
-            dataId = existingDevice.getData().id;
-            isDuplicate = true;
-            name = existingDevice.getName();
-
-            const oldAddress = existingDevice.getSetting('address');
-            if (oldAddress !== printer.address) {
-              status = 'ip_changed';
-              repairRequired = true;
-            } else {
-              status = 'already_added';
-            }
-          }
-
-          // Strict Deduplication for the Pairing List
-          if (usedIds.has(dataId)) {
-            this.log(`Skipping duplicate dataId in discovery list: ${dataId}`);
+          // Strict deduplication for the pairing list
+          if (usedIds.has(device.data.id)) {
+            this.log(`Skipping duplicate dataId in discovery list: ${device.data.id}`);
             continue;
           }
-          usedIds.add(dataId);
+          usedIds.add(device.data.id);
 
-          pairedPrinters.push({
-            name,
-            data: { id: dataId },
-            isDuplicate,
-            status,
-            repairRequired,
-            settings: {
-              address: printer.address,
-              model: printer.model,
-              mainboard_id: mid,
-            },
-          });
-          this.log('Discovered printer:', name, '@', dataId, '[', status, ']');
+          pairedPrinters.push(device);
+          this.log('Discovered printer:', device.name, '@', device.data.id, '[', device.status, ']');
         }
 
         return pairedPrinters;
@@ -84,49 +95,9 @@ class ElegooCCDriver extends Homey.Driver {
       try {
         const printer = await Discovery.probe(data.ip, data.port);
         if (printer) {
-          const mid = printer.mainboardID;
           const existingDevices = this.getDevices();
-
-          // Check if this printer is already added
-          const existingDevice = existingDevices.find((d) => {
-            const settings = d.getSettings();
-            return (mid && settings.mainboard_id === mid) || d.getData().id === printer.address;
-          });
-
-          let dataId = mid || printer.address;
-          let isDuplicate = false;
-          let name = printer.name || 'Elegoo Printer';
-          let status = 'ready';
-          let repairRequired = false;
-
-          if (existingDevice) {
-            this.log(`Manual probe correlated with existing device: ${existingDevice.getName()}`);
-            dataId = existingDevice.getData().id;
-            isDuplicate = true;
-            name = existingDevice.getName();
-
-            const oldAddress = existingDevice.getSetting('address');
-            if (oldAddress !== printer.address) {
-              status = 'ip_changed';
-              repairRequired = true;
-            } else {
-              status = 'already_added';
-            }
-          }
-
-          const device = {
-            name,
-            data: { id: dataId },
-            isDuplicate,
-            status,
-            repairRequired,
-            settings: {
-              address: printer.address,
-              model: printer.model,
-              mainboard_id: mid,
-            },
-          };
-          this.log('Found printer through manual probe:', device.name, '@', device.data.id, '[', status, ']');
+          const device = this._correlateWithExisting(printer, existingDevices);
+          this.log('Found printer through manual probe:', device.name, '@', device.data.id, '[', device.status, ']');
           return device;
         }
         this.log('No printer found at', data.ip);
@@ -169,7 +140,6 @@ class ElegooCCDriver extends Homey.Driver {
       this.log(`Repair view: ${viewId}`);
     });
 
-    // Reuse discovery during repair
     session.setHandler('discover', async () => {
       try {
         const discoveredPrinters = await Discovery.discover();
@@ -179,10 +149,7 @@ class ElegooCCDriver extends Homey.Driver {
         return discoveredPrinters.map((printer) => {
           let name = printer.name || 'Elegoo Printer';
           const isMatch = (mid && printer.mainboardID === mid) || printer.address === settings.address;
-
-          if (isMatch) {
-            name += ' (Found)';
-          }
+          if (isMatch) name += ' (Found)';
 
           return {
             name,

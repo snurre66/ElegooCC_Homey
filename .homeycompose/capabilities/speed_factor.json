@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Speed Factor",
+    "nl": "Snelheidsfactor",
+    "de": "Geschwindigkeitsfaktor",
+    "no": "Hastighetsfaktor"
+  },
+  "getable": true,
+  "setable": true,
+  "units": "%",
+  "min": 0,
+  "max": 200,
+  "step": 1
+}

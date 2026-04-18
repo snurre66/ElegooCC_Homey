@@ -1,0 +1,29 @@
+{
+  "id": "error_detected",
+  "title": {
+    "en": "Error Detected",
+    "nl": "Fout gedetecteerd",
+    "de": "Fehler erkannt",
+    "no": "Feil oppdaget"
+  },
+  "tokens": [
+    {
+      "id": "error_msg",
+      "name": "error_msg",
+      "type": "string",
+      "title": {
+        "en": "Error Message",
+        "nl": "Foutmelding",
+        "de": "Fehlermeldung",
+        "no": "Feilmelding"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

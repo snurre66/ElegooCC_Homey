@@ -1,0 +1,12 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Current Layer",
+    "nl": "Huidige laag",
+    "de": "Aktuelle Schicht",
+    "no": "Nåværende lag"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/icons/layer_progress.svg"
+}

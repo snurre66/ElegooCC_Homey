@@ -1,0 +1,64 @@
+{
+  "id": "set_speed_preset",
+  "title": {
+    "en": "Set Speed Preset",
+    "nl": "Snelheidsvoorinstelling instellen",
+    "de": "Geschwindigkeits-Preset setzen",
+    "no": "Angi hastighetsforinnstilling"
+  },
+  "titleFormatted": {
+    "en": "Set speed to [[preset]]%",
+    "nl": "Zet snelheid op [[preset]]%",
+    "de": "Geschwindigkeit auf [[preset]]% setzen",
+    "no": "Sett hastighet til [[preset]]%"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    },
+    {
+      "name": "preset",
+      "type": "dropdown",
+      "values": [
+        {
+          "id": "50",
+          "label": {
+            "en": "Silent (50%)",
+            "nl": "Stil (50%)",
+            "de": "Leise (50%)",
+            "no": "Stille (50%)"
+          }
+        },
+        {
+          "id": "100",
+          "label": {
+            "en": "Balanced (100%)",
+            "nl": "Gebalanceerd (100%)",
+            "de": "Ausgeglichen (100%)",
+            "no": "Balansert (100%)"
+          }
+        },
+        {
+          "id": "130",
+          "label": {
+            "en": "Sport (130%)",
+            "nl": "Sport (130%)",
+            "de": "Sport (130%)",
+            "no": "Sport (130%)"
+          }
+        },
+        {
+          "id": "160",
+          "label": {
+            "en": "Ludicrous (160%)",
+            "nl": "Absurd (160%)",
+            "de": "Absurd (160%)",
+            "no": "Galskap (160%)"
+          }
+        }
+      ]
+    }
+  ]
+}

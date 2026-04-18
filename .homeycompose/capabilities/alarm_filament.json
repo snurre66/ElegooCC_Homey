@@ -1,0 +1,13 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Filament Detection Alarm",
+    "nl": "Filamentdetectie alarm",
+    "de": "Filamenterkennungsalarm",
+    "no": "Filamentdeteksjonsalarm"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/filament_alarm.svg"
+}

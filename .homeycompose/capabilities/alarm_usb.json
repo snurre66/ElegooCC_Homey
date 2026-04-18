@@ -1,0 +1,13 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "USB Disk Status",
+    "nl": "USB-schijfstatus",
+    "de": "USB-Laufwerksstatus",
+    "no": "USB-diskstatus"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/usb_alarm.svg"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "pause_print",
+  "title": {
+    "en": "Pause Print",
+    "nl": "Print pauzeren",
+    "de": "Druck pausieren",
+    "no": "Sett utskrift på pause"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

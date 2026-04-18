@@ -1,0 +1,16 @@
+{
+  "id": "print_cancelled",
+  "title": {
+    "en": "Print Cancelled",
+    "nl": "Print geannuleerd",
+    "de": "Druck abgebrochen",
+    "no": "Utskrift avbrutt"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

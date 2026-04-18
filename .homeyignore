@@ -1,5 +1,6 @@
 # Documentation
 README.md
+PUBLISHING.md
 
 # Dependencies
 node_modules/
@@ -14,6 +15,14 @@ package-lock.json
 .vscode/
 .idea/
 .gitignore
+.eslintrc.json
+.eslintignore
+.prettierrc
+.prettierignore
+.husky/
+.secret.json
+.secret.json.example
+.scripts/
 app.env
 .env
 *.py

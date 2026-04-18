@@ -1,0 +1,48 @@
+{
+  "id": "com.elegoo.sdcp",
+  "name": {
+    "en": "Elegoo 3D Printers",
+    "nl": "Elegoo 3D Printers",
+    "de": "Elegoo 3D Drucker",
+    "no": "Elegoo 3D Skrivere"
+  },
+  "description": {
+    "en": "Integrating Elegoo 3D Printers effortlessly into your smart home via the local SDCP protocol.",
+    "nl": "Integreer Elegoo 3D-printers moeiteloos in je smart home via het lokale SDCP-protocol.",
+    "de": "Integrieren Sie Elegoo 3D-Drucker mühelos in Ihr Smart Home über das lokale SDCP-Protokoll.",
+    "no": "Integrer Elegoo 3D-skrivere enkelt i ditt smarthjem via den lokale SDCP-protokollen."
+  },
+  "version": "1.1.1",
+  "sdk": 3,
+  "author": {
+    "name": "<HIDDEN>",
+    "email": "<HIDDEN>"
+  },
+  "support": "https://community.homey.app/",
+  "source": "https://github.com/snurre66/elegoo-homey",
+  "bugs": {
+    "url": "https://github.com/snurre66/elegoo-homey/issues"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "<HIDDEN>"
+      }
+    }
+  },
+  "compatibility": ">=5.0.0",
+  "category": ["appliances"],
+  "tags": {
+    "en": ["elegoo", "3d printer", "smart printer"],
+    "nl": ["elegoo", "3d-printer", "slimme printer"],
+    "de": ["elegoo", "3D-Drucker", "Smart-Drucker"],
+    "no": ["elegoo", "3d-skriver", "smart-skriver"]
+  },
+  "permissions": [],
+  "brandColor": "#4381FF",
+  "images": {
+    "xlarge": "/assets/images/xlarge.jpg",
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  }
+}

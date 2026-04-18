@@ -1,0 +1,42 @@
+{
+  "id": "motors_status_changed",
+  "title": {
+    "en": "Motor Status Changed",
+    "nl": "Motorstatus gewijzigd",
+    "de": "Motorstatus geändert",
+    "no": "Motorstatus endret"
+  },
+  "titleFormatted": {
+    "en": "Motors become [[state]]",
+    "nl": "Motoren worden [[state]]",
+    "de": "Motoren werden [[state]]",
+    "no": "Motorer blir [[state]]"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    },
+    {
+      "name": "state",
+      "type": "dropdown",
+      "values": [
+        {
+          "id": "engaged",
+          "label": {
+            "en": "Engaged",
+            "no": "Aktivert"
+          }
+        },
+        {
+          "id": "disengaged",
+          "label": {
+            "en": "Disengaged / Free",
+            "no": "Deaktivert / Fri"
+          }
+        }
+      ]
+    }
+  ]
+}

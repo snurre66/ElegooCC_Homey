@@ -1,0 +1,29 @@
+{
+  "id": "status_changed",
+  "title": {
+    "en": "Printer status changed",
+    "nl": "Printerstatus gewijzigd",
+    "de": "Druckerstatus geändert",
+    "no": "Skriverstatus endret"
+  },
+  "tokens": [
+    {
+      "id": "status",
+      "name": "Status",
+      "type": "string",
+      "title": {
+        "en": "Status",
+        "nl": "Status",
+        "de": "Status",
+        "no": "Status"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Z Offset",
+    "nl": "Z-offset",
+    "de": "Z-Versatz",
+    "no": "Z-forskyvning"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "mm",
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/z_offset.svg"
+}

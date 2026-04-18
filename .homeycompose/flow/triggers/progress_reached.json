@@ -1,0 +1,37 @@
+{
+  "id": "progress_reached",
+  "title": {
+    "en": "Print progress reached",
+    "nl": "Afdrukvoortgang bereikt",
+    "de": "Druckfortschritt erreicht",
+    "no": "Utskriftfremdrift nådd"
+  },
+  "titleFormatted": {
+    "en": "Print progress reaches [[percentage]]%",
+    "nl": "Afdrukvoortgang bereikt [[percentage]]%",
+    "de": "Druckfortschritt erreicht [[percentage]]%",
+    "no": "Utskriftfremdrift når [[percentage]]%"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    },
+    {
+      "name": "percentage",
+      "type": "number",
+      "title": {
+        "en": "Percentage",
+        "nl": "Percentage",
+        "de": "Prozent",
+        "no": "Prosent"
+      },
+      "min": 0,
+      "max": 100,
+      "placeholder": {
+        "en": "50"
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "home_axes",
+  "title": {
+    "en": "Home Axes",
+    "nl": "Assen home",
+    "de": "Achsen homen",
+    "no": "Hjem akser"
+  },
+  "titleFormatted": {
+    "en": "Home [[axes]]",
+    "nl": "[[axes]] home",
+    "de": "[[axes]] homen",
+    "no": "Hjem [[axes]]"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    },
+    {
+      "name": "axes",
+      "type": "dropdown",
+      "values": [
+        {
+          "id": "XYZ",
+          "label": {
+            "en": "All (XYZ)",
+            "nl": "Alle (XYZ)",
+            "de": "Alle (XYZ)",
+            "no": "Alle (XYZ)"
+          }
+        },
+        {
+          "id": "X",
+          "label": {
+            "en": "X Axis",
+            "nl": "X-as",
+            "de": "X-Achse",
+            "no": "X-akse"
+          }
+        },
+        {
+          "id": "Y",
+          "label": {
+            "en": "Y Axis",
+            "nl": "Y-as",
+            "de": "Y-Achse",
+            "no": "Y-akse"
+          }
+        },
+        {
+          "id": "Z",
+          "label": {
+            "en": "Z Axis",
+            "nl": "Z-as",
+            "de": "Z-Achse",
+            "no": "Z-akse"
+          }
+        }
+      ]
+    }
+  ]
+}

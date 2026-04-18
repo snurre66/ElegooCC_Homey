@@ -1,0 +1,29 @@
+{
+  "id": "door_status_changed",
+  "title": {
+    "en": "Door status changed",
+    "nl": "Deurstatus gewijzigd",
+    "de": "Türstatus geändert",
+    "no": "Dørstatus endret"
+  },
+  "tokens": [
+    {
+      "id": "state",
+      "name": "State",
+      "type": "string",
+      "title": {
+        "en": "State",
+        "nl": "Status",
+        "de": "Status",
+        "no": "Status"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "video_stream_stopped",
+  "title": {
+    "en": "Viewers stopped watching camera",
+    "nl": "Kijkers zijn gestopt met kijken naar camera",
+    "de": "Zuschauer haben aufgehört, Kamera anzusehen",
+    "no": "Seere lukket kamerastrømmen"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

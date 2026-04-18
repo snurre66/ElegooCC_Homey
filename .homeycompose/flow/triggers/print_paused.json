@@ -1,0 +1,16 @@
+{
+  "id": "print_paused",
+  "title": {
+    "en": "Print Paused",
+    "nl": "Print gepauzeerd",
+    "de": "Druck pausiert",
+    "no": "Utskrift er satt på pause"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

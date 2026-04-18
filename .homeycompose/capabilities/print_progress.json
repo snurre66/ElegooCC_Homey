@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Print Progress",
+    "nl": "Printvoortgang",
+    "de": "Druckfortschritt",
+    "no": "Utskriftsprogresjon"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "%",
+  "min": 0,
+  "max": 100,
+  "icon": "/assets/icons/print_progress.svg"
+}

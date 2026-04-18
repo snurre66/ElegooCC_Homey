@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Current File",
+    "nl": "Huidig bestand",
+    "de": "Aktuelle Datei",
+    "no": "Nåværende fil"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/icons/filename.svg"
+}

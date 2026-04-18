@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Mainboard MAC",
+    "nl": "Moederbord MAC",
+    "de": "Mainboard-MAC",
+    "no": "Hovedkort-MAC"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/mac_address.svg"
+}

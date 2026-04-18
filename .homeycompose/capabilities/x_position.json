@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "X Position",
+    "nl": "X-positie",
+    "de": "X-Position",
+    "no": "X-posisjon"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "mm",
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/x_position.svg"
+}

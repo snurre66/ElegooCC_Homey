@@ -1,0 +1,16 @@
+{
+  "id": "printer_online",
+  "title": {
+    "en": "Printer Online",
+    "nl": "Printer online",
+    "de": "Drucker online",
+    "no": "Skriver tilkoblet"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

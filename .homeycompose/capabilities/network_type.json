@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Network Interface",
+    "no": "Nettverksgrensesnitt",
+    "nl": "Netwerkinterface",
+    "de": "Netzwerkschnittstelle"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor"
+}

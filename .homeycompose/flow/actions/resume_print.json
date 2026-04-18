@@ -1,0 +1,16 @@
+{
+  "id": "resume_print",
+  "title": {
+    "en": "Resume Print",
+    "nl": "Print hervatten",
+    "de": "Druck fortsetzen",
+    "no": "Gjenoppta utskrift"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

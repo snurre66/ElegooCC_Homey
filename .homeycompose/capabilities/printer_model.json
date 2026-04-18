@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Printer Model",
+    "nl": "Printermodel",
+    "de": "Druckermodell",
+    "no": "Skrivermodell"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/icons/info.svg"
+}

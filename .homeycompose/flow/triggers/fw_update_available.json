@@ -1,0 +1,16 @@
+{
+  "id": "fw_update_available",
+  "title": {
+    "en": "Firmware Update Available",
+    "nl": "Firmware-update beschikbaar",
+    "de": "Firmware-Update verfügbar",
+    "no": "Fastvareoppdatering tilgjengelig"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

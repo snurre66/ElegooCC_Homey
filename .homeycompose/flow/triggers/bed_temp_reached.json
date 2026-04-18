@@ -1,0 +1,16 @@
+{
+  "id": "bed_temp_reached",
+  "title": {
+    "en": "Bed temperature reached",
+    "nl": "Bed-temperatuur bereikt",
+    "de": "Betttemperatur erreicht",
+    "no": "Bedtemperatur nådd"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    }
+  ]
+}

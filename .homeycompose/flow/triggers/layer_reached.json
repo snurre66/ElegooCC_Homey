@@ -1,0 +1,36 @@
+{
+  "id": "layer_reached",
+  "title": {
+    "en": "Layer reached",
+    "nl": "Laag bereikt",
+    "de": "Schicht erreicht",
+    "no": "Lag nådd"
+  },
+  "titleFormatted": {
+    "en": "Layer reached [[layer]]",
+    "nl": "Laag bereikt [[layer]]",
+    "de": "Schicht erreicht [[layer]]",
+    "no": "Lag nådd [[layer]]"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    },
+    {
+      "name": "layer",
+      "type": "number",
+      "title": {
+        "en": "Layer Number",
+        "nl": "Laagnummer",
+        "de": "Schichtnummer",
+        "no": "Lagnummer"
+      },
+      "min": 0,
+      "placeholder": {
+        "en": "100"
+      }
+    }
+  ]
+}

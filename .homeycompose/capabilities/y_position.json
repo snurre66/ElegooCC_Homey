@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Y Position",
+    "nl": "Y-positie",
+    "de": "Y-Position",
+    "no": "Y-posisjon"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "mm",
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/y_position.svg"
+}

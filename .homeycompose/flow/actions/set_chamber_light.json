@@ -1,0 +1,32 @@
+{
+  "id": "set_chamber_light",
+  "title": {
+    "en": "Set Chamber Light",
+    "nl": "Kamerverlichting instellen",
+    "de": "Kammerbeleuchtung setzen",
+    "no": "Sett kammerlys"
+  },
+  "titleFormatted": {
+    "en": "Turn chamber light [[state]]",
+    "nl": "Zet kamerverlichting [[state]]",
+    "de": "Schalte Kammerbeleuchtung [[state]]",
+    "no": "Slå kammerlys [[state]]"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=elegoo_cc"
+    },
+    {
+      "name": "state",
+      "type": "checkbox",
+      "label": {
+        "en": "Turn On",
+        "nl": "Aan",
+        "de": "Ein",
+        "no": "På"
+      }
+    }
+  ]
+}

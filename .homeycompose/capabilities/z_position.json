@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Z Position",
+    "nl": "Z-positie",
+    "de": "Z-Position",
+    "no": "Z-posisjon"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "mm",
+  "icon": "/assets/icons/z_position.svg"
+}

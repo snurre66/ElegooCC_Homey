@@ -1,0 +1,12 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Camera Enabled",
+    "no": "Kamera aktivert",
+    "nl": "Camera ingeschakeld",
+    "de": "Kamera aktiviert"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor"
+}
