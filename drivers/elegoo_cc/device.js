@@ -11,20 +11,6 @@ class ElegooCCDevice extends PrinterDevice {
     await super.onInit();
     this.log(`Elegoo Centauri Carbon device initialized at ${this.host}`);
 
-    // Migrate missing capabilities from manifest to existing paired device
-    const manifestCaps = this.driver.manifest.capabilities || [];
-
-    for (const capId of manifestCaps) {
-      if (!this.hasCapability(capId)) {
-        try {
-          await this.addCapability(capId);
-          this.log(`Migrated missing capability: ${capId}`);
-        } catch (err) {
-          this.error(`Failed to add capability ${capId}:`, err.message);
-        }
-      }
-    }
-
     this.registerCamera().catch(this.error);
     this._registerListeners();
     this._registerFlowActions();
@@ -178,67 +164,55 @@ class ElegooCCDevice extends PrinterDevice {
 
   // ── Capability Listeners ──────────────────────────────────
 
-  _safeRegisterListener(capId, listener) {
-    try {
-      if (this.hasCapability(capId)) {
-        this.registerCapabilityListener(capId, listener);
-      } else {
-        this.log(`Skipping listener for ${capId} (capability not on device)`);
-      }
-    } catch (err) {
-      this.error(`Error registering listener for ${capId}:`, err.message);
-    }
-  }
-
   _registerListeners() {
     // Buttons
-    this._safeRegisterListener('button.pause', async () => {
+    this.registerCapabilityListener('button.pause', async () => {
       this.log('UI: Pause Program');
       return this.client.sendCommand(129, {});
     });
-    this._safeRegisterListener('button.resume', async () => {
+    this.registerCapabilityListener('button.resume', async () => {
       this.log('UI: Resume Program');
       return this.client.sendCommand(131, {});
     });
-    this._safeRegisterListener('button.stop', async () => {
+    this.registerCapabilityListener('button.stop', async () => {
       this.log('UI: Stop/Cancel Program');
       return this.client.sendCommand(130, {});
     });
-    this._safeRegisterListener('button.home', async () => {
+    this.registerCapabilityListener('button.home', async () => {
       this.log('UI: Home All Axes');
       return this.client.sendCommand(402, { Axis: 'XYZ' });
     });
 
     // Read-only temperature targets
-    this._safeRegisterListener('target_temperature.nozzle', async () => true);
-    this._safeRegisterListener('target_temperature.bed', async () => true);
+    this.registerCapabilityListener('target_temperature.nozzle', async () => true);
+    this.registerCapabilityListener('target_temperature.bed', async () => true);
 
     // Performance factors
-    this._safeRegisterListener('speed_factor', async (value) => {
+    this.registerCapabilityListener('speed_factor', async (value) => {
       this.log(`UI: Set Speed Factor -> ${value}%`);
       return this.client.sendCommand(403, { PrintSpeedPct: value });
     });
-    this._safeRegisterListener('extrusion_factor', async (value) => {
+    this.registerCapabilityListener('extrusion_factor', async (value) => {
       this.log(`UI: Set Extrusion Factor -> ${value}%`);
       return this.client.sendCommand(SDCP_CMD.FDM_SET_EXTRUSION, { ExtrusionFactor: value });
     });
 
     // Fans & Lights
-    this._safeRegisterListener('part_fan_speed', async (value) => {
+    this.registerCapabilityListener('part_fan_speed', async (value) => {
       this.log(`UI: Set Part Fan Speed -> ${value}%`);
       return this.client.sendCommand(403, { TargetFanSpeed: { ModelFan: value } });
     });
-    this._safeRegisterListener('onoff.chamberlight', async (value) => {
+    this.registerCapabilityListener('onoff.chamberlight', async (value) => {
       this.log(`UI: Set Chamber Light -> ${value ? 'ON' : 'OFF'}`);
       return this.client.sendCommand(403, { LightStatus: { SecondLight: value ? 1 : 0 } });
     });
-    this._safeRegisterListener('onoff.auxfan', async (value) => {
+    this.registerCapabilityListener('onoff.auxfan', async (value) => {
       return this.client.sendCommand(403, { TargetFanSpeed: { AuxiliaryFan: value ? 100 : 0 } });
     });
-    this._safeRegisterListener('onoff.exhaustfan', async (value) => {
+    this.registerCapabilityListener('onoff.exhaustfan', async (value) => {
       return this.client.sendCommand(403, { TargetFanSpeed: { BoxFan: value ? 100 : 0 } });
     });
-    this._safeRegisterListener('onoff.boxfan', async (value) => {
+    this.registerCapabilityListener('onoff.boxfan', async (value) => {
       this.log(`UI: Set Box Fan -> ${value ? 'ON' : 'OFF'}`);
       return this.client.sendCommand(403, { TargetFanSpeed: { BoxFan: value ? 100 : 0 } });
     });
@@ -337,13 +311,6 @@ class ElegooCCDevice extends PrinterDevice {
     // Status change triggers (fire last, after all capabilities are set)
     if (newStatus) {
       CapabilityMapper.handleStatusTriggers(this, newStatus, oldStatus || '');
-    }
-
-    // Migration: capture MainboardID
-    const mid = attributes.MainboardID || attributes.MainboardId || attributes.Id;
-    if (mid && !this.getSetting('mainboard_id')) {
-      this.log(`Migrating/Capturing MainboardID: ${mid}`);
-      this.setSettings({ mainboard_id: mid }).catch(this.error);
     }
   }
 
