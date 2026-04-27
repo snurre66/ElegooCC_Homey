@@ -19,5 +19,8 @@
   },
   "1.1.4": {
     "en": "Fixed capabilities to be within SDCP V3.0.0"
+  },
+  "1.1.5": {
+    "en": "Fix missing 'Paused' status (13) and prevent false disconnects by keeping connection alive on any message received"
   }
 }
